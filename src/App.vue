@@ -1,7 +1,13 @@
 <template>
   <div id="app">
 
+    <!-- 列表 -->
+    <VueList></VueList>
+
+    <!-- 条件判断 -->
+    <!--
     <VueCondition></VueCondition>
+    -->
 
     <!--
     <VueGuide></VueGuide>
@@ -36,6 +42,7 @@ import Store from './store'
 import ComponentA from './components/componentA'
 import VueGuide from './components/VueGuide'
 import VueCondition from './components/VueCondition'
+import VueList from './components/VueList'
 
 export default {
   data: function (){
@@ -62,7 +69,8 @@ export default {
     ComponentA,
     Hello,
     VueGuide,
-    VueCondition
+    VueCondition,
+    VueList
   },
   watch: {
     items: {
