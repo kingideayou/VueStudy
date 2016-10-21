@@ -1,7 +1,11 @@
 <template>
   <div id="app">
 
+    <VueCondition></VueCondition>
+
+    <!--
     <VueGuide></VueGuide>
+    -->
 
     <!--
     <h1>{{title}}</h1>
@@ -31,6 +35,7 @@ import Hello from './components/Hello'
 import Store from './store'
 import ComponentA from './components/componentA'
 import VueGuide from './components/VueGuide'
+import VueCondition from './components/VueCondition'
 
 export default {
   data: function (){
@@ -56,7 +61,8 @@ export default {
   components: {
     ComponentA,
     Hello,
-    VueGuide
+    VueGuide,
+    VueCondition
   },
   watch: {
     items: {
