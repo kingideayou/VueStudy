@@ -1,8 +1,13 @@
 <template>
   <div id="app">
 
+    <!-- 表单 -->
+    <VueForm></VueForm>
+
     <!-- 事件 -->
+    <!--
     <VueEvent></VueEvent>
+    -->
 
     <!-- 列表 -->
     <!--
@@ -49,6 +54,7 @@ import VueGuide from './components/VueGuide'
 import VueCondition from './components/VueCondition'
 import VueList from './components/VueList'
 import VueEvent from './components/VueEvent'
+import VueForm from './components/VueForm'
 
 export default {
   data: function (){
@@ -77,7 +83,8 @@ export default {
     VueGuide,
     VueCondition,
     VueList,
-    VueEvent
+    VueEvent,
+    VueForm
   },
   watch: {
     items: {
