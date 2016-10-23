@@ -1,8 +1,13 @@
 <template>
   <div id="app">
 
+    <!-- VueResource -->
+    <VueResourceDemo></VueResourceDemo>
+
     <!-- 动画 -->
+    <!--
     <VueTransition></VueTransition>
+  -->
 
     <!-- 表单 -->
     <!--
@@ -62,6 +67,7 @@ import VueList from './components/VueList'
 import VueEvent from './components/VueEvent'
 import VueForm from './components/VueForm'
 import VueTransition from './components/VueTransition'
+import VueResourceDemo from './components/VueResourceDemo'
 
 export default {
   data: function (){
@@ -92,7 +98,8 @@ export default {
     VueList,
     VueEvent,
     VueForm,
-    VueTransition
+    VueTransition,
+    VueResourceDemo
   },
   watch: {
     items: {
