@@ -1,8 +1,13 @@
 <template>
   <div id="app">
 
+    <!-- 动画 -->
+    <VueTransition></VueTransition>
+
     <!-- 表单 -->
+    <!--
     <VueForm></VueForm>
+    -->
 
     <!-- 事件 -->
     <!--
@@ -33,20 +38,21 @@
       </li>
     </ul>
     -->
-
+    <!-- 组件 -->
     <!--
     <ComponentA msgFromFather='father teach you'
         v-on:child-tell-me-something='listenToMyBoy'></ComponentA>
     <p>子视图对我说：{{ childWords}}</p>
     -->
+
     <!--
     <img src="./assets/logo.png">
     <hello></hello>
     -->
   </div>
 </template>
-<script>
 
+<script>
 import Hello from './components/Hello'
 import Store from './store'
 import ComponentA from './components/componentA'
@@ -55,6 +61,7 @@ import VueCondition from './components/VueCondition'
 import VueList from './components/VueList'
 import VueEvent from './components/VueEvent'
 import VueForm from './components/VueForm'
+import VueTransition from './components/VueTransition'
 
 export default {
   data: function (){
@@ -84,7 +91,8 @@ export default {
     VueCondition,
     VueList,
     VueEvent,
-    VueForm
+    VueForm,
+    VueTransition
   },
   watch: {
     items: {
