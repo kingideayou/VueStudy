@@ -125,7 +125,7 @@ export default {
     display: inline-block;
     vertical-align: middle;
     line-height: normal;
-    padding: 10px 30px 10px 30px;
+    padding: 10px 36px 10px 36px;
   }
 
   img {

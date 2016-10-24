@@ -1,8 +1,9 @@
 <template>
   <div id="app">
 
+    <component v-bind:is="currentView"></component>
     <!-- VueResource -->
-    <VueResourceDemo></VueResourceDemo>
+    <!-- <VueResourceDemo></VueResourceDemo> -->
 
     <!-- 动画 -->
     <!--
@@ -86,7 +87,8 @@ export default {
         }
       ],
       liClass: 'thisIsLiClass',
-      newItem: ''
+      newItem: '',
+      currentView: VueResourceDemo
     }
   },
   name: 'app',
