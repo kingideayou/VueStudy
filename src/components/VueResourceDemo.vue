@@ -99,7 +99,7 @@ export default {
   }
 
   .hp_content {
-    max-width:600px;
+    max-width:800px;
     min-height:80px;
     line-height: 100px;
     text-align: center;
@@ -111,6 +111,7 @@ export default {
   .card {
     position: relative;
     float: left;
+    width: 100%;
     margin-right: 10px;
     background: #fafafa;
     border-radius: 10px;
@@ -124,16 +125,22 @@ export default {
     display: inline-block;
     vertical-align: middle;
     line-height: normal;
+    padding: 10px 30px 10px 30px;
   }
 
   img {
     display: block;
     max-width:800px;
     max-height:600px;
-    width: auto;
+    width: 100%;
     height: auto;
     margin: 0 auto;
     border-radius: 10px 10px 0 0;
+  }
+
+  ul {
+    list-style:none;
+    padding-left:0;
   }
 
 </style>
