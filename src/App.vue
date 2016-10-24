@@ -156,4 +156,8 @@ export default {
   margin-top: 60px;
   margin: 0, auto;
 }
+
+body {
+  background: #343434;
+}
 </style>
