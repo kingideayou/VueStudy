@@ -69,6 +69,7 @@ import VueEvent from './components/VueEvent'
 import VueForm from './components/VueForm'
 import VueTransition from './components/VueTransition'
 import VueResourceDemo from './components/VueResourceDemo'
+import VueRouterStart from './components/VueRouter/VueRouterStart'
 
 export default {
   data: function (){
@@ -101,7 +102,8 @@ export default {
     VueEvent,
     VueForm,
     VueTransition,
-    VueResourceDemo
+    VueResourceDemo,
+    VueRouterStart
   },
   watch: {
     items: {
@@ -160,6 +162,6 @@ export default {
 }
 
 body {
-  background: #343434;
+  /*background: #343434;*/
 }
 </style>

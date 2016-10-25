@@ -40,6 +40,7 @@
     "webpack-hot-middleware": "^2.12.2",
     "webpack-merge": "^0.14.1",
     "bootstrap": "^3.3.7",
-    "vue-strap": "^1.1.26"
+    "vue-strap": "^1.1.26",
+    "vue-router": "^2.0.1"
   }
 }
