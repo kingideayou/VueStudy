@@ -4,6 +4,7 @@ import VueRouter from 'vue-router'
 Vue.use(VueRouter)
 
 const Home = resolve => require(['./components/VueResourceDemo.vue'], resolve)
+const VueForm = resolve => require(['./components/VueForm.vue'], resolve)
 const Foo = { template: '<div>foo</div>' }
 const Bar = { template: '<div>bar</div>' }
 const User = {
@@ -26,18 +27,14 @@ const UserHome = {
 }
 
 // 2. 定义路由
-// 每个路由应该映射一个组件。 其中"component" 可以是
-// 通过 Vue.extend() 创建的组件构造器，
-// 或者，只是一个组件配置对象。
-// 我们晚点在讨论嵌套路由。
 const routes = [
   { path: '/home', component: Home },
+  { path: '/form', component: VueForm },
   { path: '/bar', component: Bar },
    // 动态路径参数 以冒号开头
   { path: '/user/:id', component: User}
 ]
 // 3. 创建 router 实例，然后传 `routes` 配置
-// 你还可以传别的配置参数，不过先这么简单着吧。
 const router = new VueRouter({
   // （缩写）相当于 routes: routes
   routes

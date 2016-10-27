@@ -89,7 +89,7 @@ export default {
       ],
       liClass: 'thisIsLiClass',
       newItem: '',
-      currentView: VueResourceDemo
+      currentView: VueRouterStart
     }
   },
   name: 'app',
@@ -148,6 +148,10 @@ export default {
 </script>
 
 <style>
+
+#app {
+}
+
 .finished {
   text-decoration: underline;
 }

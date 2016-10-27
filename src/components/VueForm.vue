@@ -93,6 +93,7 @@
     <p>
       在 "change" 而不是 "input" 事件中更新
     </p>
+    <!--
     <input v-model.lazy="msg">
     <br>
     <h4>.number</h4>
@@ -107,6 +108,7 @@
     </p>
     <input v-model.trim="msg">
     <br>
+    -->
   </div>
 
 </template>

@@ -10,6 +10,7 @@
 
       <router-link to="/home">Home</router-link>
       <router-link to="/bar">OtherPage</router-link>
+      <router-link to="/form">VueForm</router-link>
       <router-link to="/user/NeXT">NeXT</router-link>
       <!-- <br><br> -->
       <!-- <router-link to="/user/NeXT">NeXT</router-link> -->
@@ -41,6 +42,5 @@ export default {
 
 <style lang="css">
   div {
-    /*background: #f9c813;*/
   }
 </style>

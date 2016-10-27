@@ -46,19 +46,24 @@ export default {
       //http://v3.wufazhuce.com:8000/api/hp/bymonth/2016-09-01%2000:00:00
     }
   },
+
   created () {
     this.getHomePageListByMonth()
   },
+  /*
   beforeRouteEnter (to, from, next) {
     //在导航完成前获取数据
+    console.log("VueReourceDemo run ...")
   },
+  */
   ready: function() {
-      this.getEntryIdList()
+      // this.getEntryIdList()
   },
   methods: {
       getEntryIdList: function() {
           this.$http.get(this.apiUrl)
               .then((response) => {
+                console.log("VueResourceDemo getEntryIdList run")
                 emulateJSON: true
                 if (response.data.res == 0) {
                   this.getResult = true
@@ -76,6 +81,7 @@ export default {
       getHomePageListByMonth: function() {
           this.$http.get(this.apiArticleByMonthUrl + "/" + new Date().toJSON().slice(0, 10))
               .then((response) => {
+                console.log("VueResourceDemo getEntryIdList run")
                 emulateJSON: true
                 if (response.data.res == 0) {
                   this.getResult = true
@@ -174,10 +180,6 @@ export default {
     padding-bottom: 26px;
     margin-right: 40px;
     margin-top: 5px;
-  }
-
-  body {
-    background: #343434;
   }
 
   ul {
