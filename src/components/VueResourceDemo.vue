@@ -14,11 +14,21 @@
     <ul>
       <li class="card" v-for="entry in entryList">
         <a target="_blank" :href="entry.hp_img_url"><img :src="entry.hp_img_url"></img></a>
+        <div class="hp_id_user">
+          <span class="span_title">{{ entry.hp_title }}</span>
+          <span class="span_make_time">{{ entry.hp_makettime }}</span>
+        </div>
         <div class="hp_content">
-          <span>{{ entry.hp_content}}</span>
+          <span class="span_content">{{ entry.hp_content}}</span>
+        </div>
+        <div>
+          <span class="auth">━━━━━   {{ entry.hp_author }}</span>
         </div>
       </li>
     </ul>
+
+    <div class="folat_menu"></div>
+
   </div>
 </template>
 
@@ -35,6 +45,12 @@ export default {
       apiArticleByMonthUrl: 'http://v3.wufazhuce.com:8000/api/hp/bymonth'
       //http://v3.wufazhuce.com:8000/api/hp/bymonth/2016-09-01%2000:00:00
     }
+  },
+  created () {
+    this.getHomePageListByMonth()
+  },
+  beforeRouteEnter (to, from, next) {
+    //在导航完成前获取数据
   },
   ready: function() {
       this.getEntryIdList()
@@ -70,7 +86,10 @@ export default {
                   for (let data of response.data.data) {
                       list.push({
                           hp_img_url: data.hp_img_url,
-                          hp_content: data.hp_content
+                          hp_content: data.hp_content,
+                          hp_makettime: data.hp_makettime,
+                          hp_title: data.hp_title,
+                          hp_author: data.hp_author
                       })
                   }
                   this.entryList = entryList
@@ -93,6 +112,15 @@ export default {
 
 <style lang="css">
 
+  .folat_menu {
+    width: 30px;
+    height: 30px;
+    background: #000;
+    position: fixed;
+    top: 50%;
+    right: 0;
+  }
+
   .root_content {
     max-width: 800px;
     margin: 0 auto;
@@ -100,8 +128,8 @@ export default {
 
   .hp_content {
     max-width:800px;
-    min-height:80px;
-    line-height: 100px;
+    min-height:60px;
+    line-height: 50px;
     text-align: center;
     text-align: center;
     vertical-align: middle;
@@ -121,11 +149,39 @@ export default {
     box-shadow: 3px 3px 7px rgba(0,0,0,0,3);
   }
 
-  span {
+  .span_content {
     display: inline-block;
     vertical-align: middle;
     line-height: normal;
+    margin-top: 12px;
     padding: 10px 36px 10px 36px;
+  }
+
+  .span_title {
+    float: left;
+    margin-left: 40px;
+    margin-top: 20px;
+  }
+
+  .span_make_time {
+    float: right;
+    margin-top: 20px;
+    margin-right: 40px;
+  }
+
+  .auth {
+    float:right;
+    padding-bottom: 26px;
+    margin-right: 40px;
+    margin-top: 5px;
+  }
+
+  body {
+    background: #343434;
+  }
+
+  ul {
+    float: left;
   }
 
   img {

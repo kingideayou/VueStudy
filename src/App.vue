@@ -161,7 +161,4 @@ export default {
   margin: 0, auto;
 }
 
-body {
-  /*background: #343434;*/
-}
 </style>
