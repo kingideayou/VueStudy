@@ -9,7 +9,7 @@
       <!-- <router-link to="/page_2">Go to Bar</router-link> -->
 
       <router-link to="/home">Home</router-link>
-      <router-link to="/bar">OtherPage</router-link>
+      <router-link to="/vuex">Vuex</router-link>
       <router-link to="/form">VueForm</router-link>
       <router-link to="/user/NeXT">NeXT</router-link>
       <!-- <br><br> -->

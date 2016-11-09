@@ -5,6 +5,8 @@ Vue.use(VueRouter)
 
 const Home = resolve => require(['./components/VueResourceDemo.vue'], resolve)
 const VueForm = resolve => require(['./components/VueForm.vue'], resolve)
+const VuexComponent = resolve => require(['./components/Vuex.vue'], resolve)
+const VuexDemo = resolve => require(['./components/VuexDemo.vue'], resolve)
 const Foo = { template: '<div>foo</div>' }
 const Bar = { template: '<div>bar</div>' }
 const User = {
@@ -30,7 +32,8 @@ const UserHome = {
 const routes = [
   { path: '/home', component: Home },
   { path: '/form', component: VueForm },
-  { path: '/bar', component: Bar },
+  { path: '/vuex', component: VuexDemo },
+  // { path: '/vuex', component: VuexComponent },
    // 动态路径参数 以冒号开头
   { path: '/user/:id', component: User}
 ]
