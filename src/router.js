@@ -30,6 +30,7 @@ const UserHome = {
 
 // 2. 定义路由
 const routes = [
+  { path: '/', redirect: '/home' },
   { path: '/home', component: Home },
   { path: '/form', component: VueForm },
   { path: '/vuex', component: VuexDemo },

@@ -21,6 +21,14 @@ app.use(express.static(__dirname + '/public'));
 // app.get('/readapi', api.requestApi)
 app.get('*', (req, res) => {res.sendFile(__dirname + '/public/index.html')})
 
-app.listen(80, () => {
-    console.log(`app is listening at port:80`)
+app.listen(3000, () => {
+  console.log('Node app is running on port:', 3000);
+
+  // 注册全局未捕获异常处理器
+  process.on('uncaughtException', function(err) {
+    console.error("Caught exception:", err.stack);
+  });
+  process.on('unhandledRejection', function(reason, p) {
+    console.error("Unhandled Rejection at: Promise ", p, " reason: ", reason.stack);
+  });
 })
