@@ -1,11 +1,14 @@
 const AV = require('leanengine')
 
 const config = {
-    appId: '2Kx0qpgITFGLrk2PW9JYpNqq-gzGzoHsz',
-    appKey: 'udksjm7Xp4fAWEfJETq73A5J'
+    appId: 'Bfw8DjNmL4FLoxqoz3vUlLGd-gzGzoHsz',
+    appKey: '33hHJV3K3Am3vhOw5AghkoOG'
 }
 
-AV.initialize(config.appId, config.appKey)
+AV.init({
+  appId: config.appId,
+  appKey: config.appKey
+});
 AV.Cloud.useMasterKey()
 
 exports.AV = AV

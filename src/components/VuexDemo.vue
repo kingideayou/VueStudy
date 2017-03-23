@@ -7,6 +7,8 @@
     <p>
       <button @click="increment">+</button>
       <button @click="decrement">-</button>
+      <button @click="plus10">+10</button>
+      <button @click="incrementAsync">incrementAsync</button>
     </p>
   </div>
 </template>
@@ -51,6 +53,21 @@ export default {
       return store.getters.doneTodosCount
     }
   },
+  actions: {
+    incrementAsync ({ commit }) {
+      setTimeout(() => {
+        commit('increment')
+      }, 1000)
+    },
+    increment ({ commit }) {
+      commit('increment')
+    }
+    /*
+    increment (context) {
+      context.commit('increment')
+    }
+    */
+  },
   mounted () {},
   methods: {
     increment () {
@@ -58,6 +75,23 @@ export default {
     },
     decrement () {
         store.commit('decrement')
+    },
+    plus10 () {
+      store.commit({
+        type: "plus10",
+        amount: 10
+      }, { silent: true })
+      /*
+      store.commit({
+        type: "plus10",
+        amount: 10
+      })
+      */
+      /*
+      store.commit('plus10', {
+        amount: 10
+      })
+      */
     }
   },
   components: {}
@@ -80,8 +114,14 @@ const store = new Vuex.Store({
     }
   },
   mutations: {
-    increment: state => state.count++,
-    decrement: state => state.count--
+    increment (state) {
+      state.count++
+    },
+    // increment: state => state.count++,
+    decrement: state => state.count--,
+    plus10 (state, addValue) {
+      state.count += addValue.amount
+    }
   }
 })
 </script>

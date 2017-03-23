@@ -10,7 +10,6 @@
     </p>
     <br><br>
     -->
-    <button @click="getHomePageListByMonth">获取本月文章</button>
     <ul>
       <li class="card" v-for="entry in entryList">
         <a target="_blank" :href="entry.hp_img_url"><img :src="entry.hp_img_url"></img></a>
@@ -26,6 +25,8 @@
         </div>
       </li>
     </ul>
+
+    <button @click="getHomePageListByMonth">获取本月文章</button>
 
     <div class="folat_menu"></div>
 
