@@ -3,7 +3,7 @@ import VueRouter from 'vue-router'
 
 Vue.use(VueRouter)
 
-const Home = resolve => require(['./components/VueResourceDemo.vue'], resolve)
+const Home = resolve => require(['./components/OneListPage.vue'], resolve)
 const VueForm = resolve => require(['./components/VueForm.vue'], resolve)
 const VuexComponent = resolve => require(['./components/Vuex.vue'], resolve)
 const VuexDemo = resolve => require(['./components/VuexDemo.vue'], resolve)

@@ -3,7 +3,7 @@
 
     <component v-bind:is="currentView"></component>
     <!-- VueResource -->
-    <!-- <VueResourceDemo></VueResourceDemo> -->
+    <!-- <OneListPage></OneListPage> -->
 
     <!-- 动画 -->
     <!--
@@ -68,8 +68,8 @@ import VueList from './components/VueList'
 import VueEvent from './components/VueEvent'
 import VueForm from './components/VueForm'
 import VueTransition from './components/VueTransition'
-import VueResourceDemo from './components/VueResourceDemo'
-import VueRouterStart from './components/VueRouter/VueRouterStart'
+import OneListPage from './components/OneListPage'
+import BlogVueRouter from './components/VueRouter/BlogVueRouter'
 
 export default {
   data: function (){
@@ -89,7 +89,7 @@ export default {
       ],
       liClass: 'thisIsLiClass',
       newItem: '',
-      currentView: VueRouterStart
+      currentView: BlogVueRouter
     }
   },
   name: 'app',
@@ -102,8 +102,8 @@ export default {
     VueEvent,
     VueForm,
     VueTransition,
-    VueResourceDemo,
-    VueRouterStart
+    OneListPage,
+    BlogVueRouter
   },
   watch: {
     items: {

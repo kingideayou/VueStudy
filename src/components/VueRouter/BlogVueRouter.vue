@@ -8,10 +8,21 @@
       <!-- <router-link to="/page_1">Go to Foo</router-link> -->
       <!-- <router-link to="/page_2">Go to Bar</router-link> -->
 
-      <router-link to="/home">Home</router-link>
-      <router-link to="/vuex">Vuex</router-link>
-      <router-link to="/form">VueForm</router-link>
-      <router-link to="/user/NeXT">NeXT</router-link>
+    <ul>
+      <li>
+        <router-link to="/home">Home</router-link>
+      </li>
+      <li>
+        <router-link to="/vuex">Vuex</router-link>
+      </li>
+      <li>
+        <router-link to="/form">VueForm</router-link>
+      </li>
+      <li>
+        <router-link to="/user/NeXT">NeXT</router-link>
+      </li>
+    </ul>
+
       <!-- <br><br> -->
       <!-- <router-link to="/user/NeXT">NeXT</router-link> -->
       <!-- <router-link to="/user/盖世英雄">盖世英雄</router-link> -->
@@ -41,6 +52,25 @@ export default {
 </script>
 
 <style lang="css">
-  div {
+  .header {
+    float: left;
+    margin-left: 40px;
+    margin-top: 20px;
+  }
+  ul {
+    float: inherit;
+    display: inline-block;
+  }
+  li {
+    display: inline;
+    float: left;
+    background: #333333;
+    margin: 2px;
+    padding: 2px;
+    width: 100px;
+  }
+  a {
+    text-decoration: none;
+    color: #dddddd;
   }
 </style>
