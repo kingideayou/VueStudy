@@ -28,7 +28,7 @@
 
     <button @click="getHomePageListByMonth">获取本月文章</button>
 
-    <div class="folat_menu"></div>
+    <div class="folat_menu" v-on:click="scroll2Top"></div>
 
   </div>
 </template>
@@ -61,6 +61,9 @@ export default {
       // this.getEntryIdList()
   },
   methods: {
+      scroll2Top: function() {
+        window.location = '#'
+      },
       getEntryIdList: function() {
           this.$http.get(this.apiUrl)
               .then((response) => {
@@ -124,8 +127,8 @@ export default {
     height: 30px;
     background: #000;
     position: fixed;
-    top: 50%;
-    right: 0;
+    top: 90%;
+    left: 90%;
   }
 
   .root_content {
