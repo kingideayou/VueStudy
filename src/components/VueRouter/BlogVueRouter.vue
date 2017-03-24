@@ -8,17 +8,17 @@
       <!-- <router-link to="/page_1">Go to Foo</router-link> -->
       <!-- <router-link to="/page_2">Go to Bar</router-link> -->
 
-    <ul>
-      <li>
+    <ul class="nav">
+      <li class="nav-item">
         <router-link to="/home">Home</router-link>
       </li>
-      <li>
+      <li class="nav-item">
         <router-link to="/vuex">Vuex</router-link>
       </li>
-      <li>
+      <li class="nav-item">
         <router-link to="/form">VueForm</router-link>
       </li>
-      <li>
+      <li class="nav-item">
         <router-link to="/user/NeXT">NeXT</router-link>
       </li>
     </ul>
@@ -52,22 +52,18 @@ export default {
 </script>
 
 <style lang="css">
-  .header {
-    float: left;
-    margin-left: 40px;
-    margin-top: 20px;
-  }
-  ul {
+  .nav {
     float: inherit;
     display: inline-block;
   }
-  li {
+  .nav-item {
     display: inline;
     float: left;
     background: #333333;
     margin: 2px;
     padding: 2px;
-    width: 100px;
+    min-width: 80px;
+    width: 20%;
   }
   a {
     text-decoration: none;

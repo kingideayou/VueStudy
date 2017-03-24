@@ -132,12 +132,12 @@ export default {
   }
 
   .root_content {
-    max-width: 800px;
+    max-width: 680px;
     margin: 0 auto;
   }
 
   .hp_content {
-    max-width:800px;
+    max-width:680px;
     min-height:60px;
     line-height: 50px;
     text-align: center;
