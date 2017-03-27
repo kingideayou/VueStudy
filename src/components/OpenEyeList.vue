@@ -19,6 +19,7 @@
 export default {
   data () {
     return {
+      value: [20, 50],
       videoList: [],
       openEyeApi: 'http://baobab.kaiyanapp.com/api/v1/feed'
       // openEyeApi: 'http://baobab.kaiyanapp.com/api/v2/feed?num=2&udid=26868b32e808498db32fd51fb422d00175e179df&vc=83'

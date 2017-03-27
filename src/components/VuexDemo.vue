@@ -1,5 +1,12 @@
 <template lang="html">
-  <div id="app">
+  <div id="root-div">
+
+    <el-carousel :interval="4000" type="card" height="220px" width="800px">
+      <el-carousel-item v-for="item in 6">
+        <h3>{{ item }}</h3>
+      </el-carousel-item>
+    </el-carousel>
+
     <p>{{ doneTodos }}</p>
     <p>完成任务数：{{ doneTodosCount }}</p>
     <br><br><br>
@@ -8,7 +15,7 @@
       <button @click="increment">+</button>
       <button @click="decrement">-</button>
       <button @click="plus10">+10</button>
-      <button @click="incrementAsync">incrementAsync</button>
+      <button @click="incrementAsync">incrementAsync111</button>
     </p>
   </div>
 </template>
@@ -24,7 +31,10 @@ Vue.use(Vuex)
 
 export default {
   data () {
-    return {}
+    return {
+      value1: true,
+      value2: true
+    }
   },
   /*
   computed: mapState({
@@ -54,11 +64,7 @@ export default {
     }
   },
   actions: {
-    incrementAsync ({ commit }) {
-      setTimeout(() => {
-        commit('increment')
-      }, 1000)
-    },
+
     increment ({ commit }) {
       commit('increment')
     }
@@ -70,6 +76,11 @@ export default {
   },
   mounted () {},
   methods: {
+    incrementAsync ({ commit }) {
+      setTimeout(() => {
+        commit('increment')
+      }, 1000)
+    },
     increment () {
       store.commit('increment')
     },
@@ -126,5 +137,35 @@ const store = new Vuex.Store({
 })
 </script>
 
-<style lang="css">
+<style>
+  .root-div{
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .el-carousel {
+    max-width: 800px;
+    width: 100%;
+    margin: auto;
+  }
+  .el-carousel__indicators {
+    float: none;
+  }
+  .el-carousel__item h3 {
+    color: #475669;
+    font-size: 14px;
+    opacity: 0.75;
+    line-height: 220px;
+    margin: 0;
+  }
+
+  .el-carousel__item:nth-child(2n) {
+    background-color: #99a9bf;
+  }
+
+  .el-carousel__item:nth-child(2n+1) {
+    background-color: #d3dce6;
+  }
+  ul {
+    float: none;
+  }
 </style>

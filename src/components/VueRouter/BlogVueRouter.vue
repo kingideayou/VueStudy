@@ -16,10 +16,10 @@
         <router-link to="/form">「开眼」</router-link>
       </li>
       <li class="nav-item">
-        <router-link to="/vuex">Vuex</router-link>
+        <router-link to="/vuex">「Vuex」</router-link>
       </li>
       <li class="nav-item">
-        <router-link to="/user/NeXT">NeXT</router-link>
+        <router-link to="/user/NeXT">「NeXT」</router-link>
       </li>
     </ul>
 
