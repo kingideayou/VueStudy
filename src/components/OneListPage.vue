@@ -151,7 +151,7 @@ export default {
     float: left;
     width: 100%;
     margin-right: 10px;
-    background: #fafafa;
+    background: #fafaea;
     border-radius: 10px;
     margin-top: 26px;
     margin-bottom: 26px;

@@ -4,7 +4,7 @@ import VueRouter from 'vue-router'
 Vue.use(VueRouter)
 
 const Home = resolve => require(['./components/OneListPage.vue'], resolve)
-const VueForm = resolve => require(['./components/VueForm.vue'], resolve)
+const OpenEyeList = resolve => require(['./components/OpenEyeList.vue'], resolve)
 const VuexComponent = resolve => require(['./components/Vuex.vue'], resolve)
 const VuexDemo = resolve => require(['./components/VuexDemo.vue'], resolve)
 const Foo = { template: '<div>foo</div>' }
@@ -32,7 +32,7 @@ const UserHome = {
 const routes = [
   { path: '/', redirect: '/home' },
   { path: '/home', component: Home },
-  { path: '/form', component: VueForm },
+  { path: '/form', component: OpenEyeList },
   { path: '/vuex', component: VuexDemo },
   // { path: '/vuex', component: VuexComponent },
    // 动态路径参数 以冒号开头
