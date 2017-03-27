@@ -1,8 +1,8 @@
 <template lang="html">
 
-  <div>
-    <ul class="container">
-      <li class="card" v-for="video in videoList">
+  <div class="root_view">
+    <ul>
+      <li class="video_card" v-for="video in videoList">
         <video
             class="video"
             controls="controls"
@@ -65,22 +65,13 @@ export default {
     padding-left:0;
     float: left;
   }
-  .container {
-    max-width:1200px;
-    text-align: center;
-    vertical-align: middle;
+  .root_view {
+    max-width: 1200px;
     margin: 0 auto;
   }
-  .card {
-    position: relative;
-    float: left;
+  .video_card {
     width: 100%;
-    margin-right: 10px;
-    border-radius: 10px;
-    margin-top: 26px;
-    margin-bottom: 26px;
-    -webkit-box-shadow: 3px 3px 7px rgba(0,0,0,0.3);
-    box-shadow: 3px 3px 7px rgba(0,0,0,0,3);
+    margin: auto;
   }
   .video-list .video {
     background-position: 50%;

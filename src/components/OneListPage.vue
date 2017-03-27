@@ -185,15 +185,10 @@ export default {
     margin-right: 40px;
     margin-top: 5px;
   }
-
-  ul {
-    float: left;
-  }
-
   img {
     display: block;
     max-width:800px;
-    max-height:100px;
+    max-height:1200px;
     width: 100%;
     height: auto;
     margin: 0 auto;
@@ -201,6 +196,7 @@ export default {
   }
 
   ul {
+    float: left;
     list-style:none;
     padding-left:0;
   }
