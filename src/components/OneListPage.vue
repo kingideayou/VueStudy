@@ -193,7 +193,7 @@ export default {
   img {
     display: block;
     max-width:800px;
-    max-height:600px;
+    max-height:100px;
     width: 100%;
     height: auto;
     margin: 0 auto;
