@@ -32,7 +32,7 @@ const UserHome = {
 const routes = [
   { path: '/', redirect: '/home' },
   { path: '/home', component: Home },
-  { path: '/form', component: OpenEyeList },
+  { path: '/OpenEye', component: OpenEyeList },
   { path: '/vuex', component: VuexDemo },
   // { path: '/vuex', component: VuexComponent },
    // 动态路径参数 以冒号开头

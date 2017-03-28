@@ -3,7 +3,10 @@
 
     <el-carousel :interval="4000" type="card" height="220px" width="800px">
       <el-carousel-item v-for="item in 6">
-        <h3>{{ item }}</h3>
+        <div height="220px">
+          <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/3/skyscrapers.jpg" />
+          <h3 v-on:click="playVideo(item)">{{ item }}</h3>
+        </div>
       </el-carousel-item>
     </el-carousel>
 
@@ -76,6 +79,9 @@ export default {
   },
   mounted () {},
   methods: {
+    playVideo: function (item) {
+      console.log('play video ' + item)
+    },
     incrementAsync ({ commit }) {
       setTimeout(() => {
         commit('increment')

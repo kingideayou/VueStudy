@@ -13,7 +13,7 @@
         <router-link to="/home">「One」</router-link></router-link>
       </li>
       <li class="nav-item">
-        <router-link to="/form">「开眼」</router-link>
+        <router-link to="/OpenEye">「开眼」</router-link>
       </li>
       <li class="nav-item">
         <router-link to="/vuex">「Vuex」</router-link>
