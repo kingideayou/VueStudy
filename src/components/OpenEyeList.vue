@@ -106,13 +106,13 @@ export default {
               this.getResult = true
               this.message = ''
 
-              let videoList = []
-              for (let data of response.data.dailyList[0].videoList) {
-                list.push({
-                    playUrl: data.playUrl
-                })
-              }
-              this.videoList = videoList
+              // let videoList = []
+              // for (let data of response.data.dailyList[0].videoList) {
+              //   list.push({
+              //       playUrl: data.playUrl
+              //   })
+              // }
+              // this.videoList = videoList
             })
             .catch(function(response) {
                 console.log(response)

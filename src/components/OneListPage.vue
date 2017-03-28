@@ -26,7 +26,7 @@
       </li>
     </ul>
 
-    <button @click="getHomePageListByMonth">获取本月文章</button>
+    <button class="button_load_more" @click="getHomePageListByMonth(true)">查看更多</button>
 
     <div class="folat_menu" v-on:click="scroll2Top"></div>
 
@@ -41,6 +41,7 @@ export default {
       getResult: true,
       entryList: [],
       gridData: [],
+      date: new Date(),
       message: '点击网络请求获取数据',
       apiUrl: 'http://v3.wufazhuce.com:8000/api/hp/idlist/0?',
       apiArticleByMonthUrl: 'http://v3.wufazhuce.com:8000/api/hp/bymonth'
@@ -49,7 +50,7 @@ export default {
   },
 
   created () {
-    this.getHomePageListByMonth()
+    this.getHomePageListByMonth(false)
   },
   /*
   beforeRouteEnter (to, from, next) {
@@ -82,27 +83,32 @@ export default {
                   console.log(response)
               })
       },
-      getHomePageListByMonth: function() {
-          this.$http.get(this.apiArticleByMonthUrl + "/" + new Date().toJSON().slice(0, 10))
+      getHomePageListByMonth: function(loadMore) {
+        this.date.setDate(1)
+        if (loadMore) {
+          this.date.setMonth(this.date.getMonth() - 1)
+        }
+        console.log('date: ' + this.date)
+          this.$http.get(this.apiArticleByMonthUrl + "/" + this.date)
               .then((response) => {
                 console.log("VueResourceDemo getEntryIdList run")
                 emulateJSON: true
                 if (response.data.res == 0) {
                   this.getResult = true
-                  this.entryList = response.data.data
+                  this.entryList = this.entryList.concat(response.data.data);
                   this.message = ''
 
-                  let entryList = []
-                  for (let data of response.data.data) {
-                      list.push({
-                          hp_img_url: data.hp_img_url,
-                          hp_content: data.hp_content,
-                          hp_makettime: data.hp_makettime,
-                          hp_title: data.hp_title,
-                          hp_author: data.hp_author
-                      })
-                  }
-                  this.entryList = entryList
+                  // let entryList = []
+                  // for (let data of response.data.data) {
+                  //     list.push({
+                  //         hp_img_url: data.hp_img_url,
+                  //         hp_content: data.hp_content,
+                  //         hp_makettime: data.hp_makettime,
+                  //         hp_title: data.hp_title,
+                  //         hp_author: data.hp_author
+                  //     })
+                  // }
+                  // this.entryList = entryList
 
                 } else {
                   this.getResult = false
@@ -185,6 +191,19 @@ export default {
     margin-right: 40px;
     margin-top: 5px;
   }
+
+  .button_load_more {
+    background: #333333;
+    font-style: normal;
+    border: none;
+    color: #fff;
+    padding-left: 12px;
+    padding-right: 12px;
+    padding-top: 6px;
+    padding-bottom: 6px;
+    margin-bottom: 26px;
+  }
+
   img {
     display: block;
     max-width:800px;
