@@ -15,14 +15,16 @@
         </video>
     </div>
 
-
     <h3 id="video_title">{{videoList[0].title}}</h3>
-
     <el-carousel id="view_pager" v-on:change='changeVideoTitle' :interval="3000" type="card" height="260px" arrow="never">
       <el-carousel-item v-for="video in videoList">
         <img :src="video.coverForFeed" v-on:click="playVideo(video.playUrl)"></img>
       </el-carousel-item>
     </el-carousel>
+
+    <p id="video_description">
+      {{ videoList[0].description}}
+    </p>
 
   </div>
 </template>
@@ -69,11 +71,14 @@ export default {
     },
     handleResize (event) {
       this.fullWidth = document.documentElement.clientHeight
-      console.log('window width : ' + this.fullWidth);
     },
     changeVideoTitle: function(val, oldVal) {
       var videoTitle = document.getElementById("video_title")
       videoTitle.textContent = this.videoList[val].title
+
+      var videoDescription = document.getElementById("video_description")
+      videoDescription.textContent = this.videoList[val].description
+
 
       //需要在合适的时机控制宽度
       if (this.fullWidth > 800) { //移动端
