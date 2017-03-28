@@ -2,13 +2,19 @@
 
   <div class="root_view">
 
-    <video
-        id="video_player"
-        class="video"
-        controls="controls"
-        preload="true"
-        :src="videoList[0].playUrl">
-    </video>
+    <div id="container">
+      <div id="videocover"  v-on:click='playDefaultVideo'>&nbsp;</div>
+        <video
+            id="video_player"
+            class="video"
+            controls="controls"
+            preload="true"
+            v-on:pause='showCover'
+            v-on:ended='showCover'
+            :src="videoList[0].playUrl">
+        </video>
+    </div>
+
 
     <h3 id="video_title">{{videoList[0].title}}</h3>
 
@@ -50,6 +56,17 @@ export default {
   attached () {
   },
   methods: {
+    showCover() {
+      var videoCover = document.getElementById("videocover")
+      videoCover.style.visibility = "visible"
+    },
+    playDefaultVideo() {
+      var vid = document.getElementById("video_player")
+      vid.play()
+
+      var videoCover = document.getElementById("videocover")
+      videoCover.style.visibility = "hidden"
+    },
     handleResize (event) {
       this.fullWidth = document.documentElement.clientHeight
       console.log('window width : ' + this.fullWidth);
@@ -107,6 +124,18 @@ export default {
     padding-left:0;
     float: left;
   }
+  #container {
+    position: relative;
+  }
+  #videocover {
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+
   .root_view {
     max-width: 1000px;
     margin: 0 auto;
