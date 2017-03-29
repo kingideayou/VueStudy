@@ -136,7 +136,8 @@ export default {
                   if (currentHour >= 23 || currentHour < 9) {//显示晚间视频
                     var videoDate = new Date(data.date)
                     let videoHour = videoDate.getHours()
-                    if (videoHour == 23) {//显示晚间视频
+
+                    if (videoHour == 21) {//显示晚间视频
                       tempVideoList = tempVideoList.concat(data);
                     }
                   } else {//显示日间视频
