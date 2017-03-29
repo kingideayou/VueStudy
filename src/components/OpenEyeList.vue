@@ -26,6 +26,8 @@
       {{ videoList[0].description}}
     </p>
 
+    <button class="button_load_more" @click="loadMore">更多视频</button>
+
   </div>
 </template>
 
@@ -39,7 +41,8 @@ export default {
       value: [20, 50],
       videoList: [],
       fullWidth: document.documentElement.clientWidth,
-      openEyeApi: 'http://baobab.kaiyanapp.com/api/v1/feed' //分界限 9:00 & 21:00in
+      openEyeApi: 'http://baobab.kaiyanapp.com/api/v1/feed',
+      nextPageUrl: ''
       // openEyeApi: 'http://baobab.kaiyanapp.com/api/v2/feed?num=2&udid=26868b32e808498db32fd51fb422d00175e179df&vc=83'
     }
   },
@@ -50,7 +53,7 @@ export default {
     window.removeEventListener('resize', this.handleResize)
   },
   created () {
-    this.getOpenEyeListToday()
+    this.getOpenEyeList()
   },
   computed: {},
   mounted () {
@@ -58,6 +61,10 @@ export default {
   attached () {
   },
   methods: {
+    loadMore() {
+      this.openEyeApi = this.nextPageUrl
+      this.getOpenEyeList()
+    },
     showCover() {
       var videoCover = document.getElementById("videocover")
       videoCover.style.visibility = "visible"
@@ -96,12 +103,20 @@ export default {
 
       }
     },
+    isToday: function (date){
+        var todaysDate = new Date();
+        if(date.setHours(0,0,0,0) == todaysDate.setHours(0,0,0,0)){
+            return true;
+        } else {
+            return false;
+        }
+    },
     playVideo: function (url) {
       var vid = document.getElementById("video_player")
       vid.src = url
       vid.play()
     },
-    getOpenEyeListToday: function() {
+    getOpenEyeList: function() {
         this.$http.options.emulateJSON = true;
         this.$http.get(this.openEyeApi)
             .then((response) => {
@@ -110,27 +125,32 @@ export default {
               var tempVideoList = [];
               this.getResult = true
               this.message = ''
+              this.nextPageUrl = response.data.nextPageUrl
 
               var currentDate = new Date()
               let currentHour = currentDate.getHours()
 
-              for (let data of response.data.dailyList[0].videoList) {
-                if (currentHour >= 23 || currentHour < 9) {//显示晚间视频
-                  var videoDate = new Date(data.date)
-                  let videoHour = videoDate.getHours()
-                  if (videoHour == 23) {//显示晚间视频
-                    tempVideoList = tempVideoList.concat(data);
-                  }
-                } else {//显示日间视频
-                  var videoDate = new Date(data.date)
-                  let videoHour = videoDate.getHours()
-                  if (videoHour == 9) {
-                    tempVideoList = tempVideoList.concat(data);
+              var videoListDate = new Date(response.data.dailyList[0].date)
+              if (this.isToday(videoListDate)) {
+                for (let data of response.data.dailyList[0].videoList) {
+                  if (currentHour >= 23 || currentHour < 9) {//显示晚间视频
+                    var videoDate = new Date(data.date)
+                    let videoHour = videoDate.getHours()
+                    if (videoHour == 23) {//显示晚间视频
+                      tempVideoList = tempVideoList.concat(data);
+                    }
+                  } else {//显示日间视频
+                    var videoDate = new Date(data.date)
+                    let videoHour = videoDate.getHours()
+                    if (videoHour == 9) {
+                      tempVideoList = tempVideoList.concat(data);
+                    }
                   }
                 }
+                this.videoList = tempVideoList
+              } else {
+                this.videoList = response.data.dailyList[0].videoList
               }
-
-              this.videoList = tempVideoList
 
               // let videoList = []
               // for (let data of response.data.dailyList[0].videoList) {
@@ -212,5 +232,17 @@ export default {
 
   .el-carousel__item:nth-child(2n+1) {
     background-color: #d3dce6;
+  }
+  .button_load_more {
+    background: #333333;
+    font-style: normal;
+    border: none;
+    color: #eee;
+    padding-left: 12px;
+    padding-right: 12px;
+    padding-top: 6px;
+    padding-bottom: 6px;
+    margin-bottom: 26px;
+    margin-top: 20px;
   }
 </style>
