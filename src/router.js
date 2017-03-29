@@ -31,8 +31,8 @@ const UserHome = {
 // 2. 定义路由
 const routes = [
   { path: '/', redirect: '/home' },
-  { path: '/home', component: Home },
-  { path: '/OpenEye', component: OpenEyeList },
+  { path: '/home', component: OpenEyeList },
+  { path: '/One', component: Home },
   { path: '/vuex', component: VuexDemo },
   // { path: '/vuex', component: VuexComponent },
    // 动态路径参数 以冒号开头

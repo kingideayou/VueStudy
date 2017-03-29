@@ -10,10 +10,10 @@
 
     <ul class="nav">
       <li class="nav-item">
-        <router-link to="/home">「One」</router-link></router-link>
+        <router-link to="/home">「开眼」</router-link>
       </li>
       <li class="nav-item">
-        <router-link to="/OpenEye">「开眼」</router-link>
+        <router-link to="/One">「One」</router-link></router-link>
       </li>
       <li class="nav-item">
         <router-link to="/vuex">「Vuex」</router-link>
