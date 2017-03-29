@@ -16,7 +16,7 @@
     </div>
 
     <h3 id="video_title">{{videoList[0].title}}</h3>
-    <el-carousel id="view_pager" v-on:change='changeVideoTitle' :interval="3000" type="card" height="260px" arrow="never">
+    <el-carousel id="view_pager" v-on:change='changeVideoTitle' :interval="4000" type="card" height="260px" arrow="never">
       <el-carousel-item v-for="video in videoList">
         <img :src="video.coverForFeed" v-on:click="playVideo(video.playUrl)"></img>
       </el-carousel-item>
@@ -39,7 +39,7 @@ export default {
       value: [20, 50],
       videoList: [],
       fullWidth: document.documentElement.clientWidth,
-      openEyeApi: 'http://baobab.kaiyanapp.com/api/v1/feed'
+      openEyeApi: 'http://baobab.kaiyanapp.com/api/v1/feed' //分界限 9:00 & 21:00in
       // openEyeApi: 'http://baobab.kaiyanapp.com/api/v2/feed?num=2&udid=26868b32e808498db32fd51fb422d00175e179df&vc=83'
     }
   },
@@ -85,6 +85,10 @@ export default {
         var viewPager = document.getElementById("view_pager")
         var child = viewPager.children[0]
         child.style.height = "220px";
+      } else if (this.fullWidth > 600) {
+        var viewPager = document.getElementById("view_pager")
+        var child = viewPager.children[0]
+        child.style.height = "160px";
       } else {
         var viewPager = document.getElementById("view_pager")
         var child = viewPager.children[0]
@@ -102,9 +106,31 @@ export default {
         this.$http.get(this.openEyeApi)
             .then((response) => {
               emulateJSON: true
-              this.videoList = response.data.dailyList[0].videoList
+
+              var tempVideoList = [];
               this.getResult = true
               this.message = ''
+
+              var currentDate = new Date()
+              let currentHour = currentDate.getHours()
+
+              for (let data of response.data.dailyList[0].videoList) {
+                if (currentHour >= 23 || currentHour < 9) {//显示晚间视频
+                  var videoDate = new Date(data.date)
+                  let videoHour = videoDate.getHours()
+                  if (videoHour == 23) {//显示晚间视频
+                    tempVideoList = tempVideoList.concat(data);
+                  }
+                } else {//显示日间视频
+                  var videoDate = new Date(data.date)
+                  let videoHour = videoDate.getHours()
+                  if (videoHour == 9) {
+                    tempVideoList = tempVideoList.concat(data);
+                  }
+                }
+              }
+
+              this.videoList = tempVideoList
 
               // let videoList = []
               // for (let data of response.data.dailyList[0].videoList) {
