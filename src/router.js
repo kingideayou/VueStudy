@@ -32,6 +32,7 @@ const UserHome = {
 const routes = [
   { path: '/', redirect: '/home' },
   { path: '/home', component: OpenEyeList },
+  { path: '/home/:videoId', component: OpenEyeList },
   { path: '/One', component: Home },
   { path: '/vuex', component: VuexDemo },
   // { path: '/vuex', component: VuexComponent },

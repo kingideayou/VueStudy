@@ -4,11 +4,23 @@
 
     <div id="container">
       <div id="videocover"  v-on:click='playDefaultVideo'>&nbsp;</div>
-        <video
+        <video v-if="this.isNumber(openEyeVideoId)"
             id="video_player"
             class="video"
             controls="controls"
             preload="true"
+            autoplay="auto"
+            v-on:preload="playVideoFromVideoId"
+            v-on:pause='showCover'
+            v-on:ended='showCover'
+            :src="this.openEyeBaseUrl + this.openEyeVideoId">
+        </video>
+        <video v-else
+            id="video_player"
+            class="video"
+            controls="controls"
+            preload="true"
+            v-on:preload="playVideoFromVideoId"
             v-on:pause='showCover'
             v-on:ended='showCover'
             :src="videoList[0].playUrl">
@@ -41,8 +53,11 @@ export default {
       value: [20, 50],
       videoList: [],
       fullWidth: document.documentElement.clientWidth,
+      openEyeVideoId: '',
       openEyeApi: 'http://baobab.kaiyanapp.com/api/v1/feed',
-      nextPageUrl: ''
+      nextPageUrl: '',
+      currentVideoUrl: '',
+      openEyeBaseUrl: 'http://baobab.kaiyanapp.com/api/v1/playUrl?editionType=default&source=ucloud&vid='
       // openEyeApi: 'http://baobab.kaiyanapp.com/api/v2/feed?num=2&udid=26868b32e808498db32fd51fb422d00175e179df&vc=83'
     }
   },
@@ -53,6 +68,11 @@ export default {
     window.removeEventListener('resize', this.handleResize)
   },
   created () {
+    // console.log('LifeCircle : created');
+    // console.log('LifeCircle created : ' + this.openEyeUrl);
+    // console.log('LifeCircle created url : ' + this.$route.params.url);
+    this.openEyeVideoId = this.$route.params.videoId
+    console.log('openEyeVideoId : ' + this.openEyeVideoId);
     this.getOpenEyeList()
   },
   computed: {},
@@ -61,6 +81,25 @@ export default {
   attached () {
   },
   methods: {
+    playVideoFromVideoId() {
+
+      this.$nextTick(function () {
+        if (this.isNumber(this.openEyeVideoId)) {
+          console.log('isNumber : true');
+          console.log('currentVideoUrl : ' + this.openEyeBaseUrl + this.openEyeVideoId);
+          this.playVideo(this.openEyeBaseUrl + this.openEyeVideoId)
+          this.openEyeVideoId = ''
+        } else {
+          console.log('isNumber : false');
+        }
+      })
+    },
+    isNumber(numberStr) {
+      if (numberStr!=null && numberStr!="") {
+       return !isNaN(numberStr);
+      }
+   return false;
+    },
     loadMore() {
       this.openEyeApi = this.nextPageUrl
       this.getOpenEyeList()
@@ -166,7 +205,26 @@ export default {
             })
           }
   },
-  components: {}
+  components: {},
+  beforeRouteEnter (to, from, next) {
+    console.log('LifeCircle : beforeRouteEnter');
+    console.log(to);
+    console.log('to param url : ' + to.params.videoId)
+    next(vm => {
+      vm.openEyeVideoId = to.params.videoId
+      // console.log('route next : ' + vm.openEyeVideoId)
+      // vm.playVideo(vm.openEyeUrl)
+    })
+  },
+  watch: {
+    '$route' (to, from) {
+      console.log(from);
+      console.log(to.params.videoId);
+    },
+    $route () {
+      console.log('param url : ' + this.$route.params.videoId);
+    }
+  }
 }
 </script>
 
