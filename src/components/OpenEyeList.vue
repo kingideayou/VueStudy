@@ -10,6 +10,7 @@
             controls="controls"
             preload="true"
             autoplay="auto"
+            v-on:play="onVideoPlay"
             v-on:preload="playVideoFromVideoId"
             v-on:pause='showCover'
             v-on:ended='showCover'
@@ -20,6 +21,7 @@
             class="video"
             controls="controls"
             preload="true"
+            v-on:play="onVideoPlay"
             v-on:preload="playVideoFromVideoId"
             v-on:pause='showCover'
             v-on:ended='showCover'
@@ -30,7 +32,7 @@
     <h3 id="video_title">{{videoList[0].title}}</h3>
     <el-carousel id="view_pager" v-on:change='changeVideoTitle' :interval="4000" type="card" height="260px" arrow="never">
       <el-carousel-item v-for="video in videoList">
-        <img :src="video.coverForFeed" v-on:click="playVideo(video.playUrl)"></img>
+        <img :src="video.coverForFeed" v-on:click="changeCurrentVideo(video.id)"></img>
       </el-carousel-item>
     </el-carousel>
 
@@ -81,6 +83,19 @@ export default {
   attached () {
   },
   methods: {
+    onVideoPlay() {
+      var videoCover = document.getElementById("videocover")
+      videoCover.style.visibility = "hidden"
+
+      if (typeof(this.openEyeVideoId) == "undefined") {
+        this.openEyeVideoId = this.videoList[0].id;
+      }
+      this.$router.replace({ path: '/home/' + this.openEyeVideoId })
+    },
+    changeCurrentVideo(selectedVideoId) {
+      this.openEyeVideoId = selectedVideoId
+      this.$router.replace({ path: '/home/' + selectedVideoId })
+    },
     playVideoFromVideoId() {
 
       this.$nextTick(function () {
@@ -88,7 +103,6 @@ export default {
           console.log('isNumber : true');
           console.log('currentVideoUrl : ' + this.openEyeBaseUrl + this.openEyeVideoId);
           this.playVideo(this.openEyeBaseUrl + this.openEyeVideoId)
-          this.openEyeVideoId = ''
         } else {
           console.log('isNumber : false');
         }
@@ -111,9 +125,6 @@ export default {
     playDefaultVideo() {
       var vid = document.getElementById("video_player")
       vid.play()
-
-      var videoCover = document.getElementById("videocover")
-      videoCover.style.visibility = "hidden"
     },
     handleResize (event) {
       this.fullWidth = document.documentElement.clientHeight
@@ -208,6 +219,7 @@ export default {
   components: {},
   beforeRouteEnter (to, from, next) {
     console.log('LifeCircle : beforeRouteEnter');
+    console.log(from);
     console.log(to);
     console.log('to param url : ' + to.params.videoId)
     next(vm => {
