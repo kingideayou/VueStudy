@@ -54,10 +54,6 @@ export default {
   .main-wrap {
       max-width: 80rem;
   }
-  p {
-    font-size: 1.1rem;
-    line-height: 1.8;
-  }
   @media all and (max-width: 768px) {
     .news-content {
         width: 100%;

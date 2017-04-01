@@ -14,7 +14,7 @@ blockquote {
   font-size: 100%;
 }
 ul, ol {
-  padding-left: 20px;
+  /*padding-left: 20px;*/
 }
 .web-logo {
   width: 126px;
