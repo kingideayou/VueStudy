@@ -20,7 +20,6 @@ export default {
   data () {
     return {
       stories: [],
-      jiawenProxy: 'http://zhihu.bood.in/readapi?uri=',
       zhihuDailyApi: 'http://news-at.zhihu.com/api/4/news/latest'
     }
   },
@@ -35,7 +34,10 @@ export default {
       this.$http.get(this.$Api(this.zhihuDailyApi))
           .then((response) => {
             emulateJSON: true
-            this.stories = response.data.stories
+            console.log(response.data);
+            // var entryList = JSON.parse(response.data.data.jsonstories)
+            this.stories = response.data.data.stories
+            console.log(this.stories);
             // console.log(response.data.stories)
           })
           .catch(function(response) {

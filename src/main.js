@@ -11,7 +11,8 @@ Vue.use(VueResource)
 Vue.use(ElementUI)
 
 Vue.prototype.$Api = (url) => {
-    return 'http://zhihu.bood.in/readapi?uri=' + url
+  return window.location.origin + '/readapi?uri=' + url
+    // return 'http://zhihu.bood.in/readapi?uri=' + url
 }
 
 /* eslint-disable no-new */

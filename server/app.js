@@ -6,7 +6,7 @@ const app       = express()
 
 // RESOURCES
 // const imagebox    = require('./routes/imagebox')
-// const api         = require('./routes/api')
+const api         = require('./routes/api')
 
 //
 app.use(function(req, res, next) {
@@ -19,7 +19,7 @@ app.use(express.static(__dirname + '/public'));
 // app.use('/api', proxy({target: 'http://www.example.org', changeOrigin: true}));
 // APIS
 // app.get('/imagebox', imagebox.upload)
-// app.get('/readapi', api.requestApi)
+app.get('/readapi', api.getJsonFromApi)
 app.get('*', (req, res) => {res.sendFile(__dirname + '/public/index.html')})
 
 app.listen(3000, () => {
