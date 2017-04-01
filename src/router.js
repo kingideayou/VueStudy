@@ -7,6 +7,8 @@ const Home = resolve => require(['./components/OneListPage.vue'], resolve)
 const OpenEyeList = resolve => require(['./components/OpenEyeList.vue'], resolve)
 const VuexComponent = resolve => require(['./components/Vuex.vue'], resolve)
 const VuexDemo = resolve => require(['./components/VuexDemo.vue'], resolve)
+const ZhihuDailyList = resolve => require(['./components/ZhihuDailyList.vue'], resolve)
+const ZhihuDailyDetail = resolve => require(['./components/ZhihuDailyDetail.vue'], resolve)
 const Foo = { template: '<div>foo</div>' }
 const Bar = { template: '<div>bar</div>' }
 const User = {
@@ -34,8 +36,9 @@ const routes = [
   { path: '/home', component: OpenEyeList },
   { path: '/home/:videoId', component: OpenEyeList },
   { path: '/One', component: Home },
-  { path: '/vuex', component: VuexDemo },
+  { path: '/Daily', component: ZhihuDailyList },
   // { path: '/vuex', component: VuexComponent },
+  { path: '/DailyDetail/:id', component: ZhihuDailyDetail},
    // 动态路径参数 以冒号开头
   { path: '/user/:id', component: User}
 ]

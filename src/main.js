@@ -10,6 +10,10 @@ Vue.use(VueRouter)
 Vue.use(VueResource)
 Vue.use(ElementUI)
 
+Vue.prototype.$Api = (url) => {
+    return 'http://zhihu.bood.in/readapi?uri=' + url
+}
+
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
