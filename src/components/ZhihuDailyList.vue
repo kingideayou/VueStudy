@@ -45,7 +45,7 @@ export default {
             emulateJSON: true
             console.log(response.data);
             // var entryList = JSON.parse(response.data.data.jsonstories)
-            this.stories = response.data.data.stories
+            this.stories = response.data.stories
             console.log(this.stories);
             // console.log(response.data.stories)
           })

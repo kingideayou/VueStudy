@@ -10,7 +10,8 @@
 export default {
   data () {
     return {
-      news: {}
+      news: {},
+      title: ''
     }
   },
   created () {
@@ -23,8 +24,9 @@ export default {
       this.$http.get(this.$Api(`http://news-at.zhihu.com/api/4/news/${id}`))
           .then(response => {
             console.log('知乎日报详情页');
-            console.log(response.data.data.body);
-            this.news = response.data.data
+            console.log(response.data);
+            this.news = response.data
+            this.title = response.data.title
               // if (this.news.images && this.news.images.length) {
               //     this.$covImg(this, this.news.images[0], cloudSrc => {
               //         this.coverImage = cloudSrc
