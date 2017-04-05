@@ -97,6 +97,9 @@ export default {
     box-sizing: border-box;
   }
   @media all and (max-width: 768px) {
+    .article {
+      max-width: 690px;
+    }
     .news-content {
         width: 100%;
     }
@@ -104,6 +107,11 @@ export default {
         width: 100%;
         left: 0;
         box-sizing: border-box;
+    }
+  }
+  @media all and (max-width: 520px) {
+    .article {
+      width: 100%;
     }
   }
 </style>
