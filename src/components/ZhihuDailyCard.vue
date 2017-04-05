@@ -33,9 +33,14 @@ export default {
   },
   data () {
     return {
-      cloudSrc: 'http://ac-dpeFsmm4.clouddn.com/d4a2e33ab96b2c7d7eb9.jpg'
+      cloudSrc: 'http://a1418.phobos.apple.com/us/r1000/060/Purple/v4/fc/5f/b4/fc5fb47c-9948-f15e-93f8-8d7886fccb02/mzl.iytuxepq.png'
       // cloudSrc: WAIT_IMG
     }
+  },
+  created () {
+    this.$covImg(this, this.data.images[0], cloudSrc => {
+                this.cloudSrc = cloudSrc
+            })
   },
   computed: {},
   mounted () {},

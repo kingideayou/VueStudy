@@ -4,11 +4,34 @@ import VueResource from 'vue-resource'
 import App from './App'
 import router from './router'
 import ElementUI from 'element-ui'
+import LocalDB from './image_cache'
 import 'element-ui/lib/theme-default/index.css'
 
 Vue.use(VueRouter)
 Vue.use(VueResource)
 Vue.use(ElementUI)
+
+const IMG_MAP = new LocalDB('zhihu_daily_img')
+
+Vue.prototype.$covImg = (self, uri, callback) => {
+    if (IMG_MAP.get(uri)) {
+        return callback(IMG_MAP.get(uri))
+    }
+
+    let data = window.btoa(uri.split('').reverse().join(''))
+    self.$http.get(window.location.origin + '/imagebox?type=rev-64&data=' + data)
+        .then(response => {
+            if (response.data.code === 200) {
+                IMG_MAP.set(uri, response.data.data.url)
+                callback(response.data.data.url)
+            } else {
+                console.log(response.data.message)
+            }
+        })
+        .catch(err => {
+            console.log(err)
+        })
+}
 
 Vue.prototype.$Api = (url) => {
   return window.location.origin + '/readapi?uri=' + url

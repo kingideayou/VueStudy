@@ -5,7 +5,7 @@ const app       = express()
 // var proxy = require('http-proxy-middleware');
 
 // RESOURCES
-// const imagebox    = require('./routes/imagebox')
+const imagebox    = require('./routes/imagebox')
 const api         = require('./routes/api')
 
 //
@@ -18,7 +18,7 @@ app.use(function(req, res, next) {
 app.use(express.static(__dirname + '/public'));
 // app.use('/api', proxy({target: 'http://www.example.org', changeOrigin: true}));
 // APIS
-// app.get('/imagebox', imagebox.upload)
+app.get('/imagebox', imagebox.upload)
 app.get('/readapi', api.getJsonFromApi)
 app.get('*', (req, res) => {res.sendFile(__dirname + '/public/index.html')})
 
