@@ -70,7 +70,7 @@ export default {
     max-width: 860px;
   }
   .daily_item {
-    margin-top: 16px;
+    margin-top: 1.6em;
   }
   el-row {
     margin-bottom: 20px;

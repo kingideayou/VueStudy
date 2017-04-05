@@ -1,9 +1,9 @@
 <template lang="html">
 
   <article>
-    <h2>
-      {{ title }}
-    </h2>
+    <div class="news-title">
+      <h2> {{ title }}</h2>
+    </div>
     <div class="news-content" v-html="news.body"></div>
   </article>
 
@@ -13,6 +13,7 @@
 export default {
   data () {
     return {
+      hasCoverImage: false,
       news: {},
       title: ''
     }
@@ -36,9 +37,38 @@ export default {
               //         this.hasCoverImage = true
               //     })
               // }
-              // this.$nextTick(this.loadImg)
+              if (this.news.images && this.news.images.length) {
+                this.$covImg(this, this.news.images[0], cloudSrc =>  {
+                    this.coverImage = cloudSrc
+                    this.hasCoverImage = true
+                })
+              }
+              this.$nextTick(this.loadImg)
           })
           .catch(console.log)
+      },
+      loadImg () {
+          let imgs = this.$el.getElementsByTagName('img')
+          for (let img of imgs) {
+              img.onerror = () => {
+                  this.$covImg(this, img.src, cloudSrc => {
+                      img.src = cloudSrc
+                  })
+              }
+          }
+      },
+      newsContent (body) {
+          const imgReg = /<img\s[^>]*?src\s*=\s*['\"]([^'\"]*?)['\"][^>]*?>/g
+          const srcReg = /htt(p|ps):\/\/.*?(png|jpg|jpeg|gif|webp|svg)/
+          const imgs = body.match(imgReg)
+          imgs.forEach(img => {
+              let imgSrc = img.match(srcReg)[0]
+              this.$covImg(this, imgSrc, cloudSrc => {
+                  body = body.replace(imgSrc, cloudSrc)
+              })
+          })
+
+          return body
       }
   },
   components: {}
@@ -59,6 +89,16 @@ export default {
   .main-wrap {
       max-width: 80rem;
   }
+  .news-title {
+    width: 100%;
+    left: 0;
+    max-width: 800px;
+    color: #eee;
+    padding: 20px;
+    margin: auto;
+    background: #555;
+    box-sizing: border-box;
+  }
   @media all and (max-width: 768px) {
     .news-content {
         width: 100%;
@@ -66,7 +106,6 @@ export default {
     .news-title {
         width: 100%;
         left: 0;
-        padding: 1rem;
         box-sizing: border-box;
     }
   }
