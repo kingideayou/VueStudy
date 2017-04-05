@@ -58,7 +58,7 @@ export default {
   }
   .img_daily_card {
     width: 100%;
-    height: auto;
+    height: 100%;
     margin: 0 auto;
   }
   .image {
@@ -73,7 +73,7 @@ export default {
     width: 100%;
     margin: 0;
     padding: 0, 5px;
-    top: 145px;
+    top: 8.5em;
   }
   .title {
     line-height: 1.5em;

@@ -71,6 +71,7 @@ export default {
   }
   .daily_item {
     margin-top: 1.6em;
+    height: 12em;
   }
   el-row {
     margin-bottom: 20px;
