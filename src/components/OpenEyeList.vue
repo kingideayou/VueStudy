@@ -76,6 +76,8 @@ export default {
     this.openEyeVideoId = this.$route.params.videoId
     console.log('openEyeVideoId : ' + this.openEyeVideoId);
     this.getOpenEyeList()
+
+    navigator.userAgent
   },
   computed: {},
   mounted () {

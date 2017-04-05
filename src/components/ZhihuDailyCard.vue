@@ -52,6 +52,7 @@ export default {
 <style lang="css">
   .daily_card {
     background: #666;
+    margin-top: 1.2em;
     /*border-radius: 10px;*/
     box-shadow: 0 0 .625rem .08rem rgba(0,0,0,.03);
     -webkit-box-shadow: 2px 2px 6px rgba(0,0,0,0.12);
@@ -82,7 +83,54 @@ export default {
     padding: .3em;
     display: block;
   }
-
+  @media all and (max-width: 768px) {
+        .image {
+          position: relative;
+          width: 100%;
+          height: 10em;
+        }
+        .title {
+          line-height: 1.5em;
+          height: 3em;       /* height is 2x line-height, so two lines will display */
+          overflow: hidden;  /* prevents extra lines from being visible */
+          padding: .3em;
+          display: block;
+        }
+        h4 {
+          position: absolute;
+          background: rgb(0, 0, 0); /* fallback color */
+          background: rgba(0, 0, 0, 0.5);
+          width: 100%;
+          margin: 0;
+          padding: 0, 5px;
+          top: 6.5em;
+        }
+    }
+    @media all and (max-width: 520px) {
+        .daily_card {
+          margin-top: .6em;
+        }
+        .image {
+          position: relative;
+          height: 5em;
+          background: #fff;
+        }
+        h4 {
+          background: rgba(0, 0, 0, 0);
+          top:0em;
+          color: #666;
+          height: 5em;
+        }
+        .img_daily_card {
+          width: auto;
+          float: right;
+        }
+        .title {
+          padding: 0;
+          margin-right: 5em;
+          padding-top: 1.2em;
+        }
+    }
   /*
   @media (-webkit-min-device-pixel-ratio: 0) {
     .title {
