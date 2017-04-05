@@ -4,7 +4,7 @@
     <div class="daily_container">
 
       <el-row :gutter="16">
-        <el-col class="daily_item" v-for="story in stories" :span="6">
+        <el-col class="daily_item" v-for="story in stories" :span="6" >
           <daily-card :data="story"></daily-card>
         </el-col>
       </el-row>

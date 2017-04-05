@@ -1,6 +1,9 @@
 <template lang="html">
 
   <article>
+    <h2>
+      {{ title }}
+    </h2>
     <div class="news-content" v-html="news.body"></div>
   </article>
 

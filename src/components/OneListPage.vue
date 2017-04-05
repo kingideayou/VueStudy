@@ -12,7 +12,7 @@
     -->
     <ul>
       <li class="card" v-for="entry in entryList">
-        <a target="_blank" :href="entry.hp_img_url"><img :src="entry.hp_img_url"></img></a>
+        <a target="_blank" :href="entry.hp_img_url"><img class="img_one" :src="entry.hp_img_url"></img></a>
         <div class="hp_id_user">
           <span class="span_title">{{ entry.hp_title }}</span>
           <span class="span_make_time">{{ entry.hp_makettime }}</span>
@@ -204,7 +204,7 @@ export default {
     margin-bottom: 26px;
   }
 
-  img {
+  .img_one {
     display: block;
     max-width:800px;
     max-height:1200px;
