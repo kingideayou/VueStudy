@@ -1,7 +1,8 @@
 <template lang="html">
 
   <div class="daily_card">
-    <router-link :to="{ path: 'DailyDetail/'+data.id}">
+    <a target="_blank" :href="currentUrl + '/#/DailyDetail/'+data.id" >
+    <!-- <router-link :to="{ path: 'DailyDetail/'+data.id}"> -->
       <div class="image">
         <img  class="img_daily_card" :src="cloudSrc" alt="" />
         <h4>
@@ -16,7 +17,8 @@
       <span>
         id:{{ data.id }}
       </span> -->
-    </router-link>
+    <!-- </router-link> -->
+    </a>
 
   </div>
 
@@ -33,6 +35,7 @@ export default {
   },
   data () {
     return {
+      currentUrl: window.location.origin,
       cloudSrc: 'http://a1418.phobos.apple.com/us/r1000/060/Purple/v4/fc/5f/b4/fc5fb47c-9948-f15e-93f8-8d7886fccb02/mzl.iytuxepq.png'
       // cloudSrc: WAIT_IMG
     }

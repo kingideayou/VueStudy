@@ -107,7 +107,6 @@ const download = function (uri) {
 const hashTable = new HashTable(1000)
 
 module.exports.upload = function(req, res) {
-  console.log('image box upload run .......');
     let type = req.query.type
     let uri
 
