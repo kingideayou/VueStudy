@@ -1,6 +1,6 @@
 <template lang="html">
 
-  <article>
+  <article class="article">
     <div class="news-title">
       <h2> {{ title }}</h2>
     </div>
@@ -77,11 +77,11 @@ export default {
 
 <style src="../assets/zhihudaily.css"></style>
 <style lang="css">
-  .news-content {
-      max-width: 800px;
-      width: 80rem;
-      margin: auto;
-      box-shadow: 0 0 .625rem .08rem rgba(0,0,0,.05);
+  .article {
+    margin: auto;
+    max-width: 800px;
+    width: 80rem;
+    box-shadow: 0 0 .625rem .08rem rgba(0,0,0,.05);
   }
   .news-content p > img {
       width: 100%;
@@ -90,13 +90,10 @@ export default {
       max-width: 80rem;
   }
   .news-title {
-    width: 100%;
-    left: 0;
-    max-width: 800px;
-    color: #eee;
-    padding: 20px;
+    color: #333;
+    padding-top: 30px;
+    padding-bottom: 20px;
     margin: auto;
-    background: #555;
     box-sizing: border-box;
   }
   @media all and (max-width: 768px) {

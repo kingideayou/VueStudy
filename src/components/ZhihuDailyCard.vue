@@ -52,7 +52,7 @@ export default {
 <style lang="css">
   .daily_card {
     background: #666;
-    margin-top: 1.2em;
+    margin-top: .12em;
     /*border-radius: 10px;*/
     box-shadow: 0 0 .625rem .08rem rgba(0,0,0,.03);
     -webkit-box-shadow: 2px 2px 6px rgba(0,0,0,0.12);
@@ -70,7 +70,7 @@ export default {
   h4 {
     position: absolute;
     background: rgb(0, 0, 0); /* fallback color */
-    background: rgba(0, 0, 0, 0.5);
+    background: rgba(0, 0, 0, 0.68);
     width: 100%;
     margin: 0;
     padding: 0, 5px;
@@ -99,7 +99,7 @@ export default {
         h4 {
           position: absolute;
           background: rgb(0, 0, 0); /* fallback color */
-          background: rgba(0, 0, 0, 0.5);
+          background: rgba(0, 0, 0, 0.68);
           width: 100%;
           margin: 0;
           padding: 0, 5px;
