@@ -2,14 +2,18 @@
 
   <article class="article">
     <div class="news-title">
-      <h2> {{ title }}</h2>
+      <h2 id="title"> {{ title }}</h2>
     </div>
     <div class="news-content" v-html="news.body"></div>
+    <div class="share_button" v-on:click="clip">
+    </div>
   </article>
 
 </template>
 
+<script src="https://cdn.jsdelivr.net/clipboard.js/1.6.0/clipboard.min.js"></script>
 <script>
+import Clipboard from '../Clipboard.min.js'
 export default {
   data () {
     return {
@@ -24,6 +28,18 @@ export default {
   computed: {},
   mounted () {},
   methods: {
+    clip() {
+      new Clipboard('.share_button', {
+        text: function(trigger) {
+            const title = document.getElementById("title").innerText
+            return '「' + title + '」 ' + window.location.href
+        }
+      });
+      this.$message({
+          message: '链接已复制到剪贴板',
+          type: 'success'
+        });
+    },
     fetchNews (id) {
       this.$http.get(this.$Api(`http://news-at.zhihu.com/api/4/news/${id}`))
           .then(response => {
@@ -113,5 +129,13 @@ export default {
     .article {
       width: 100%;
     }
+  }
+  .share_button {
+    width: 30px;
+    height: 30px;
+    background: #000;
+    position: fixed;
+    top: 90%;
+    left: 90%;
   }
 </style>
