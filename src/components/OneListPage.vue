@@ -26,7 +26,9 @@
       </li>
     </ul>
 
-    <button class="button_load_more" @click="getHomePageListByMonth(true)">查看更多</button>
+    <div v-if="entryList.length != 0">
+      <button class="button_load_more" @click="getHomePageListByMonth(true)">查看更多</button>
+    </div>
 
     <div class="folat_menu" v-on:click="scroll2Top"></div>
 
@@ -63,7 +65,7 @@ export default {
   },
   methods: {
       scroll2Top: function() {
-        window.location = '#'
+        window.location = '#/One'
       },
       getEntryIdList: function() {
           this.$http.get(this.apiUrl)
@@ -161,8 +163,8 @@ export default {
     border-radius: 10px;
     margin-top: 26px;
     margin-bottom: 26px;
+    box-shadow: 0 0 .625rem .08rem rgba(0,0,0,.05);
     -webkit-box-shadow: 3px 3px 7px rgba(0,0,0,0.3);
-    box-shadow: 3px 3px 7px rgba(0,0,0,0,3);
   }
 
   .span_content {

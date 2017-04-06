@@ -9,7 +9,9 @@
         </el-col>
       </el-row>
 
-      <button class="button_load_more" @click="getDailyList()">更多</button>
+      <div class="button_parent" v-if="this.currentDate != -1">
+        <button class="button_load_more" @click="getDailyList()">更多</button>
+      </div>
 
     </div>
 
@@ -48,14 +50,15 @@ export default {
       if (this.currentDate == -1) {
         apiUrl = this.zhihuDailyApi + 'latest';
       } else {
-        apiUrl = this.zhihuDailyApi + this.currentDate
+        apiUrl = this.zhihuDailyApi + 'before/' + this.currentDate
       }
+      console.log('url : ' + apiUrl);
       this.$http.get(this.$Api(apiUrl))
           .then((response) => {
             emulateJSON: true
             console.log(response.data);
             // var entryList = JSON.parse(response.data.data.jsonstories)
-            this.stories = response.data.stories
+            this.stories = this.stories.concat(response.data.stories)
             this.currentDate = response.data.date
             console.log(this.stories);
             // console.log(response.data.stories)
@@ -108,6 +111,9 @@ export default {
   .row-bg {
     padding: 10px 0;
     background-color: #f9fafc;
+  }
+  .button_parent {
+    margin-top: 2em;
   }
   @media all and (max-width: 768px) {
       .daily_container {
