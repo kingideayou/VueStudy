@@ -9,7 +9,7 @@
         </el-col>
       </el-row>
 
-      <!-- <button class="button_load_more" @click="getHomePageListByMonth(true)">查看更多</button> -->
+      <button class="button_load_more" @click="getDailyList()">更多</button>
 
     </div>
 
@@ -22,9 +22,10 @@ import DailyCard from './ZhihuDailyCard.vue'
 export default {
   data () {
     return {
+      currentDate: -1,
       cardSpan: 6,
       stories: [],
-      zhihuDailyApi: 'http://news-at.zhihu.com/api/4/news/latest'
+      zhihuDailyApi: 'http://news-at.zhihu.com/api/4/news/'
     }
   },
   created() {
@@ -43,12 +44,19 @@ export default {
     },
     getDailyList() {
       this.$http.options.emulateJSON = true;
-      this.$http.get(this.$Api(this.zhihuDailyApi))
+      let apiUrl
+      if (this.currentDate == -1) {
+        apiUrl = this.zhihuDailyApi + 'latest';
+      } else {
+        apiUrl = this.zhihuDailyApi + this.currentDate
+      }
+      this.$http.get(this.$Api(apiUrl))
           .then((response) => {
             emulateJSON: true
             console.log(response.data);
             // var entryList = JSON.parse(response.data.data.jsonstories)
             this.stories = response.data.stories
+            this.currentDate = response.data.date
             console.log(this.stories);
             // console.log(response.data.stories)
           })

@@ -32,7 +32,7 @@
     <h3 id="video_title">{{videoList[0].title}}</h3>
     <el-carousel id="view_pager" v-on:change='changeVideoTitle' :interval="4000" type="card" height="260px" arrow="never">
       <el-carousel-item v-for="video in videoList">
-        <img :src="video.coverForFeed" v-on:click="changeCurrentVideo(video.id)"></img>
+        <img class="img_banner" :src="video.coverForFeed" v-on:click="changeCurrentVideo(video.id)"></img>
       </el-carousel-item>
     </el-carousel>
 
@@ -305,6 +305,9 @@ export default {
 
   .el-carousel__item:nth-child(2n+1) {
     background-color: #d3dce6;
+  }
+  .img_banner {
+    width: 100%;
   }
   .button_load_more {
     background: #333333;

@@ -96,12 +96,12 @@ export default {
     margin: auto;
     box-sizing: border-box;
   }
+  .content {
+    text-align: left;
+  }
   @media all and (max-width: 768px) {
     .article {
       max-width: 690px;
-    }
-    .news-content {
-        width: 100%;
     }
     .news-title {
         width: 100%;
