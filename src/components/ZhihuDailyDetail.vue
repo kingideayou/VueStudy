@@ -59,6 +59,7 @@ export default {
                     this.hasCoverImage = true
                 })
               }
+              this.$nextTick(this.updateOrganicationTextAlign)
               this.$nextTick(this.loadImg)
           })
           .catch(console.log)
@@ -85,6 +86,14 @@ export default {
           })
 
           return body
+      },
+      updateOrganicationTextAlign () {
+         var organizations = document.getElementsByClassName("s1")
+         if (organizations.length > 0) {
+           var parentP = organizations[0].parentElement
+           parentP.style.textAlign = 'center'
+           console.log('parentP : ' + parentP);
+         }
       }
   },
   components: {}
