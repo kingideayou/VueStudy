@@ -78,6 +78,7 @@ export default {
     this.getOpenEyeList()
 
     navigator.userAgent
+    document.title = '开眼 - 一个就够了'
   },
   computed: {},
   mounted () {

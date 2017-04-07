@@ -27,12 +27,17 @@ export default {
   },
   computed: {},
   mounted () {},
+  watch: {
+    title: function (val, old) {
+      document.title = val
+    }
+  },
   methods: {
     clip() {
       new Clipboard('.share_button', {
         text: function(trigger) {
             const title = document.getElementById("title").innerText
-            return '「' + title + '」 ' + window.location.href
+            return '「' + title + '」 ' + window.location.href + ' #One - 一个就够了#'
         }
       });
       this.$message({
@@ -47,6 +52,7 @@ export default {
             console.log(response.data);
             this.news = response.data
             this.title = response.data.title
+            console.log('title : ' + this.title);
               // if (this.news.images && this.news.images.length) {
               //     this.$covImg(this, this.news.images[0], cloudSrc => {
               //         this.coverImage = cloudSrc

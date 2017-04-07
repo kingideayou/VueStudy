@@ -53,6 +53,7 @@ export default {
 
   created () {
     this.getHomePageListByMonth(false)
+    document.title = 'One - 一个就够了'
   },
   /*
   beforeRouteEnter (to, from, next) {

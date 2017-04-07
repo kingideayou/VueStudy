@@ -35,6 +35,7 @@ export default {
       this.cardSpan = 24;
     }
     this.getDailyList()
+    document.title = '日报 - 一个就够了'
   },
   computed: {},
   mounted () {},
