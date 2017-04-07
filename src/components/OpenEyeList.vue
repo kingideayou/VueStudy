@@ -32,13 +32,14 @@
     <h3 id="video_title">{{videoList[0].title}}</h3>
     <el-carousel id="view_pager" v-on:change='changeVideoTitle' :interval="4000" type="card" height="260px" arrow="never">
       <el-carousel-item v-for="video in videoList">
-        <img class="img_banner" :src="video.coverForFeed" v-on:click="changeCurrentVideo(video.id)"></img>
+        <img class="img_banner" :src="video.coverForFeed" v-on:click="changeCurrentVideo(video)"></img>
       </el-carousel-item>
     </el-carousel>
 
     <p id="video_description">
       {{ videoList[0].description}}
     </p>
+    <div class="share_button" v-on:click="clip"/>
 
     <button class="button_load_more" @click="loadMore">更多视频</button>
 
@@ -47,7 +48,7 @@
 
 <script>
 
-
+import Clipboard from '../Clipboard.min.js'
 
 export default {
   data () {
@@ -56,6 +57,8 @@ export default {
       videoList: [],
       fullWidth: document.documentElement.clientWidth,
       openEyeVideoId: '',
+      openEyeVideoTitle: '',
+      openEyeVideoDesc: '',
       openEyeApi: 'http://baobab.kaiyanapp.com/api/v1/feed',
       nextPageUrl: '',
       currentVideoUrl: '',
@@ -86,6 +89,30 @@ export default {
   attached () {
   },
   methods: {
+    clip() {
+      var openEyeVideoTitle = this.openEyeVideoTitle
+      var openEyeVideoDesc = this.openEyeVideoDesc
+      new Clipboard('.share_button', {
+        text: function(trigger) {
+            console.log('openEyeVideoTitle : ' + openEyeVideoTitle);
+            var desc = ''
+            if (openEyeVideoDesc.length > 50) {
+                desc = openEyeVideoDesc.substring(0, openEyeVideoDesc.length > 50 ? 50 : openEyeVideoDesc.length) + '...'
+            } else {
+                desc = openEyeVideoDesc
+            }
+            if (openEyeVideoTitle.length == 0) {
+                return window.location.href + ' #One - 一个就够了#'
+            } else {
+                return '「' + openEyeVideoTitle + ' 」 - ' + desc + window.location.href + ' #One - 一个就够了#'
+            }
+        }
+      });
+      this.$message({
+          message: '链接已复制到剪贴板',
+          type: 'success'
+        });
+    },
     onVideoPlay() {
       var videoCover = document.getElementById("videocover")
       videoCover.style.visibility = "hidden"
@@ -95,9 +122,11 @@ export default {
       }
       this.$router.replace({ path: '/home/' + this.openEyeVideoId })
     },
-    changeCurrentVideo(selectedVideoId) {
-      this.openEyeVideoId = selectedVideoId
-      this.$router.replace({ path: '/home/' + selectedVideoId })
+    changeCurrentVideo(selectedVideo) {
+      this.openEyeVideoId = selectedVideo.id
+      this.openEyeVideoTitle = selectedVideo.title
+      this.openEyeVideoDesc = selectedVideo.description
+      this.$router.replace({ path: '/home/' + selectedVideo.id })
     },
     playVideoFromVideoId() {
 
@@ -206,6 +235,15 @@ export default {
                 this.videoList = response.data.dailyList[0].videoList
               }
 
+              if (!this.isNumber(this.openEyeVideoId)) {
+                console.log('1111');
+                this.openEyeVideoId = this.videoList[0].id
+                this.openEyeVideoTitle = this.videoList[0].title
+                this.openEyeVideoDesc = this.videoList[0].description
+              } else {
+                console.log('2222222');
+              }
+
               // let videoList = []
               // for (let data of response.data.dailyList[0].videoList) {
               //   list.push({
@@ -238,6 +276,9 @@ export default {
     },
     $route () {
       console.log('param url : ' + this.$route.params.videoId);
+    },
+    openEyeVideoTitle: function (val, old) {
+      document.title = val
     }
   }
 }
@@ -321,5 +362,13 @@ export default {
     padding-bottom: 6px;
     margin-bottom: 26px;
     margin-top: 20px;
+  }
+  .share_button {
+    width: 30px;
+    height: 30px;
+    background: #000;
+    position: fixed;
+    top: 90%;
+    left: 90%;
   }
 </style>
