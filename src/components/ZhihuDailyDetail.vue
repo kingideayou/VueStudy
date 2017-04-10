@@ -52,13 +52,6 @@ export default {
             console.log(response.data);
             this.news = response.data
             this.title = response.data.title
-            console.log('title : ' + this.title);
-              // if (this.news.images && this.news.images.length) {
-              //     this.$covImg(this, this.news.images[0], cloudSrc => {
-              //         this.coverImage = cloudSrc
-              //         this.hasCoverImage = true
-              //     })
-              // }
               if (this.news.images && this.news.images.length) {
                 this.$covImg(this, this.news.images[0], cloudSrc =>  {
                     this.coverImage = cloudSrc
@@ -71,13 +64,19 @@ export default {
           .catch(console.log)
       },
       loadImg () {
-          let imgs = this.$el.getElementsByTagName('img')
-          for (let img of imgs) {
-              img.onerror = () => {
-                  this.$covImg(this, img.src, cloudSrc => {
-                      img.src = cloudSrc
-                  })
-              }
+          var imgs = this.$el.getElementsByTagName('img')
+          var parent = this
+          for (var i = 0; i < imgs.length; i++) {
+            var img = imgs[i]
+            img.onerror = function() {
+              var currentImg = this
+              var currentSrc = this.src
+              console.log('currentSrc : ' + currentSrc);
+              parent.$covImg(parent, currentSrc, cloudSrc => {
+                console.log('cloudSrc : ' + cloudSrc);
+                  currentImg.src = cloudSrc
+              })
+            }
           }
       },
       newsContent (body) {
