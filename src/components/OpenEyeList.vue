@@ -12,7 +12,7 @@
             autoplay="auto"
             v-on:play="onVideoPlay"
             v-on:preload="playVideoFromVideoId"
-            v-on:pause='showCover'
+            v-on:pause='showPauseCover'
             v-on:ended='showCover'
             :src="this.openEyeBaseUrl + this.openEyeVideoId">
         </video>
@@ -23,14 +23,14 @@
             preload="true"
             v-on:play="onVideoPlay"
             v-on:preload="playVideoFromVideoId"
-            v-on:pause='showCover'
+            v-on:pause='showPauseCover'
             v-on:ended='showCover'
             :src="videoList[0].playUrl">
         </video>
     </div>
 
     <h3 id="video_title">{{videoList[0].title}}</h3>
-    <el-carousel id="view_pager" v-on:change='changeVideoTitle' :interval="4000" type="card" height="260px" arrow="never">
+    <el-carousel id="view_pager" v-on:change='changeVideoTitle' :interval="6000" type="card" height="260px" arrow="never">
       <el-carousel-item v-for="video in videoList">
         <img class="img_banner" :src="video.coverForFeed" v-on:click="changeCurrentVideo(video)"></img>
       </el-carousel-item>
@@ -39,7 +39,7 @@
     <p id="video_description">
       {{ videoList[0].description}}
     </p>
-    <div class="share_button" v-on:click="clip"/>
+    <div id="share_button" class="share_button icon-share-alt icon-muted" v-on:click="clip"/>
 
     <button class="button_load_more" @click="loadMore">更多视频</button>
 
@@ -109,7 +109,7 @@ export default {
         }
       });
       this.$message({
-          message: '链接已复制到剪贴板',
+          message: '分享链接已复制到剪贴板',
           type: 'success'
         });
     },
@@ -121,6 +121,7 @@ export default {
         this.openEyeVideoId = this.videoList[0].id;
       }
       this.$router.replace({ path: '/home/' + this.openEyeVideoId })
+      this.showShareButton()
     },
     changeCurrentVideo(selectedVideo) {
       this.openEyeVideoId = selectedVideo.id
@@ -153,6 +154,18 @@ export default {
     showCover() {
       var videoCover = document.getElementById("videocover")
       videoCover.style.visibility = "visible"
+      this.hideShareButton()
+    },
+    showPauseCover() {
+      var videoCover = document.getElementById("videocover")
+      videoCover.style.visibility = "visible"
+      this.hideShareButton()
+    },
+    hideShareButton() {
+      document.getElementById('share_button').style.display = 'none';
+    },
+    showShareButton() {
+      document.getElementById('share_button').style.display = 'block';
     },
     playDefaultVideo() {
       var vid = document.getElementById("video_player")
@@ -284,6 +297,7 @@ export default {
 }
 </script>
 
+<style src="../assets/css/font-awesome.min.css"></style>
 <style lang="css">
   ul {
     list-style:none;
@@ -364,11 +378,14 @@ export default {
     margin-top: 20px;
   }
   .share_button {
-    width: 30px;
-    height: 30px;
-    background: #000;
+    padding-left: 6px;
+    padding-right: 5px;
+    padding-top: 6px;
+    padding-bottom: 5px;
+    background: #333;
     position: fixed;
     top: 90%;
     left: 90%;
+    display: none;
   }
 </style>

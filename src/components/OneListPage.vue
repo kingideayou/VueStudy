@@ -1,5 +1,5 @@
 <template lang="html">
-  <div class="root_content">
+  <div id="container" class="root_content">
     <!--
     <button @click="getEntryIdList">网络请求</button>
     <p v-if="getResult && gridData.length > 0">
@@ -30,7 +30,9 @@
       <button class="button_load_more" @click="getHomePageListByMonth(true)">查看更多</button>
     </div>
 
-    <div class="folat_menu" v-on:click="scroll2Top"></div>
+    <div id="folat_menu" class="folat_menu" v-on:click="scroll2Top">
+      <span class="icon-arrow-up icon-muted"></span>
+    </div>
 
   </div>
 </template>
@@ -54,6 +56,10 @@ export default {
   created () {
     this.getHomePageListByMonth(false)
     document.title = 'One - 一个就够了'
+    window.addEventListener('scroll', this.handleScroll);
+  },
+  destroyed () {
+    window.removeEventListener('scroll', this.handleScroll);
   },
   /*
   beforeRouteEnter (to, from, next) {
@@ -65,8 +71,16 @@ export default {
       // this.getEntryIdList()
   },
   methods: {
+      handleScroll: function() {
+        var windowHeight = document.documentElement.clientHeight
+        if (window.scrollY > windowHeight * 2) {
+          document.getElementById('folat_menu').style.display = 'block';
+        } else {
+          document.getElementById('folat_menu').style.display = 'none';
+        }
+      },
       scroll2Top: function() {
-        window.location = '#/One'
+        window.scrollTo(0, 0)
       },
       getEntryIdList: function() {
           this.$http.get(this.apiUrl)
@@ -129,15 +143,19 @@ export default {
 }
 </script>
 
+<style src="../assets/css/font-awesome.min.css"></style>
 <style lang="css">
 
   .folat_menu {
-    width: 30px;
-    height: 30px;
     background: #000;
     position: fixed;
     top: 90%;
     left: 90%;
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    display: none;
   }
 
   .root_content {

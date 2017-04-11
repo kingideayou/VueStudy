@@ -1,11 +1,12 @@
 <template lang="html">
 
-  <article class="article">
+  <article id="container" class="article">
     <div class="news-title">
       <h2 id="title"> {{ title }}</h2>
     </div>
     <div class="news-content" v-html="news.body"></div>
-    <div class="share_button" v-on:click="clip">
+    <div id="share_button" class="share_button" v-on:click="clip">
+      <span class="icon-arrow-up icon-muted"></span>
     </div>
   </article>
 
@@ -24,6 +25,10 @@ export default {
   },
   created () {
     this.fetchNews(this.$route.params.id)
+    window.addEventListener('scroll', this.handleScroll);
+  },
+  destroyed () {
+    window.removeEventListener('scroll', this.handleScroll);
   },
   computed: {},
   mounted () {},
@@ -33,7 +38,18 @@ export default {
     }
   },
   methods: {
+    handleScroll() {
+      var windowHeight = document.documentElement.clientHeight
+      var container = this.$el.querySelector("#container");
+      if (window.scrollY + windowHeight > document.body.scrollHeight / 2) {
+        document.getElementById('share_button').style.display = 'block';
+        // document.getElementById('share_button').slideDown("slow")
+      } else {
+        document.getElementById('share_button').style.display = 'none';
+      }
+    },
     clip() {
+      window.scrollTo(0, 0)
       new Clipboard('.share_button', {
         text: function(trigger) {
             const title = document.getElementById("title").innerText
@@ -106,6 +122,7 @@ export default {
 </script>
 
 <style src="../assets/zhihudaily.css"></style>
+<style src="../assets/css/font-awesome.min.css"></style>
 <style lang="css">
   .article {
     margin: auto;
@@ -145,11 +162,16 @@ export default {
     }
   }
   .share_button {
-    width: 30px;
-    height: 30px;
-    background: #000;
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    background: #333;
     position: fixed;
-    top: 90%;
+    top: 92%;
     left: 90%;
+    display: none;
+    float: inherit;
+    text-align: center;
   }
 </style>
