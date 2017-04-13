@@ -9,6 +9,7 @@ const VuexComponent = resolve => require(['./components/Vuex.vue'], resolve)
 const VuexDemo = resolve => require(['./components/VuexDemo.vue'], resolve)
 const ZhihuDailyList = resolve => require(['./components/ZhihuDailyList.vue'], resolve)
 const ZhihuDailyDetail = resolve => require(['./components/ZhihuDailyDetail.vue'], resolve)
+const ReadHub = resolve => require(['./components/Readhub.vue'], resolve)
 const Foo = { template: '<div>foo</div>' }
 const Bar = { template: '<div>bar</div>' }
 const User = {
@@ -40,7 +41,8 @@ const routes = [
   // { path: '/vuex', component: VuexComponent },
   { path: '/DailyDetail/:id', component: ZhihuDailyDetail},
    // 动态路径参数 以冒号开头
-  { path: '/user/:id', component: User}
+  { path: '/user/:id', component: User},
+  { path: '/ReadHub', component: ReadHub}
 ]
 // 3. 创建 router 实例，然后传 `routes` 配置
 const router = new VueRouter({

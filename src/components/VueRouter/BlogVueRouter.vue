@@ -19,8 +19,11 @@
         <router-link to="/One">「一个」</router-link></router-link>
       </li>
       <li class="nav-item">
-        <router-link to="/user/NeXT">「NeXT」</router-link>
+        <router-link to="/ReadHub">「资讯」</router-link>
       </li>
+      <!-- <li class="nav-item">
+        <router-link to="/user/NeXT">「NeXT」</router-link>
+      </li> -->
     </ul>
 
       <!-- <br><br> -->
