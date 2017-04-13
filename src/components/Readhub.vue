@@ -19,12 +19,13 @@
 export default {
   data () {
     return {
-      apiUrl: 'https://api.readhub.me/topic',
+      apiUrl: 'https://api.readhub.me/topic?pageSize=20',
       readList: []
     }
   },
   created() {
     this.getReadList()
+    document.title = '科技资讯 - 一个就够了'
   },
   computed: {},
   mounted () {},
@@ -51,6 +52,8 @@ export default {
   .read_desc {
     margin-top: 10px;
     color: #565656;
+    padding-left: 16px;
+    padding-right: 16px;
   }
   .read_title {
     font-size: 1.2rem;
@@ -61,20 +64,12 @@ export default {
     color: #333;
     padding: 20px;
   }
-  .root_content {
-
-  }
   .read_card {
-    position: relative;
-    float: left;
     width: 100%;
     margin-right: 10px;
     background: #ffffff;
     border-radius: 0px;
-    margin-top: 26px;
-    margin-bottom: 26px;
-    padding-left: 16px;
-    padding-right: 16px;
+    margin-bottom: 38px;
     box-shadow: 0 0 .455rem .08rem rgba(0,0,0,.05);
   }
 </style>
