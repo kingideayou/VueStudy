@@ -31,8 +31,8 @@
           {{ currentStyle }}
         </el-button>
         <el-dropdown-menu slot="dropdown">
-          <el-dropdown-item selectedStyle="热门">热门</el-dropdown-item>
-          <el-dropdown-item selectedStyle="最新">最新</el-dropdown-item>
+          <el-dropdown-item command="热门">热门</el-dropdown-item>
+          <el-dropdown-item command="最新">最新</el-dropdown-item>
         </el-dropdown-menu>
       </el-dropdown>
     </div>
@@ -46,7 +46,7 @@ export default {
   data () {
     return {
       apiUrl: 'https://api.readhub.me/topic?pageSize=20',
-      apiUrlRecent: 'https://api.readhub.me/news?lastCursor=1492051020000&pageSize=20',
+      apiUrlRecent: 'https://api.readhub.me/news?pageSize=20',
       readList: [],
       colorList: ["#6ABBED", "#7FC667", "#7277E7", "#EE6A6C", "#718FD5", "#74C5CB"],
       mouseOverItem: '',
@@ -70,24 +70,22 @@ export default {
   },
   methods: {
     changeListStyle: function(selectedStyle) {
-      if (selectedStyle == currentStyle) {
+      if (selectedStyle == this.currentStyle) {
         return;
       }
-      if (selectedStyle == '热门') {
-        getReadList()
-      } else {
-
-      }
+      this.currentStyle = selectedStyle
+      this.getReadList()
+      window.scrollTo(0, 0)
     },
     openUrl: function(read){
       this.mouseOverItem = ''
       var win = window.open(read.newsArray[0].url, '_blank')
       win.focus()
     },
-    getReadList(url, needContact, listStyle) {
+    getReadList(url, needContact) {
       this.$http.options.emulateJSON = true;
       if (!url) {
-        if (listStyle == '热门') {
+        if (this.currentStyle == '热门') {
           url = this.apiUrl
           console.log('url : ' + this.apiUrl);
         } else {
@@ -110,8 +108,16 @@ export default {
           })
     },
     loadMore() {
-      var lastReadId = this.readList[this.readList.length-1].id;
-      var requestUrl = 'https://api.readhub.me/topic?lastCursor=' + lastReadId + '&pageSize=20';
+      var requestUrl;
+      if (this.currentStyle == '热门') {
+        var lastReadId = this.readList[this.readList.length-1].id;
+        requestUrl = 'https://api.readhub.me/topic?lastCursor=' + lastReadId + '&pageSize=20';
+      } else {
+        var lastPublishTime = new Date(this.readList[this.readList.length-1].publishDate)
+        var unixtime = lastPublishTime.getTime()
+        requestUrl = 'https://api.readhub.me/news?lastCursor=' + unixtime + '&pageSize=20';
+      }
+      console.log('requestUrl : ' + requestUrl);
       this.getReadList(requestUrl, true)
     },
     uniquel(array) {
