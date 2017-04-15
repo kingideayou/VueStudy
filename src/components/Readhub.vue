@@ -8,7 +8,7 @@
             v-on:mouseover="mouseOverItem = read"
             v-on:mouseleave="mouseOverItem = ''">
 
-        <a class="card_item" target="_blank" :href="read.newsArray[0].url">
+        <a class="card_item" :href="read.url ? read.url : read.newsArray[0].url" target="_blank">
           <div id="read_title"
               class="read_title"
               :class="{ read_title_hover: mouseOverItem == read }">{{ read.title}}</div>
@@ -24,6 +24,19 @@
     <div v-if="readList.length != 0">
       <button class="button_load_more" @click="loadMore">更多资讯</button>
     </div>
+
+    <div id="share_button" class="menu_selector" v-on:click="">
+      <el-dropdown @command="changeListStyle">
+        <el-button type="primary">
+          {{ currentStyle }}
+        </el-button>
+        <el-dropdown-menu slot="dropdown">
+          <el-dropdown-item selectedStyle="热门">热门</el-dropdown-item>
+          <el-dropdown-item selectedStyle="最新">最新</el-dropdown-item>
+        </el-dropdown-menu>
+      </el-dropdown>
+    </div>
+
   </div>
 
 </template>
@@ -33,33 +46,54 @@ export default {
   data () {
     return {
       apiUrl: 'https://api.readhub.me/topic?pageSize=20',
+      apiUrlRecent: 'https://api.readhub.me/news?lastCursor=1492051020000&pageSize=20',
       readList: [],
       colorList: ["#6ABBED", "#7FC667", "#7277E7", "#EE6A6C", "#718FD5", "#74C5CB"],
-      mouseOverItem: ''
+      mouseOverItem: '',
+      currentStyle: '热门'
     }
   },
   created() {
     this.getReadList()
     document.title = '科技资讯 - 一个就够了'
+    console.log('created run');
   },
   computed: {},
-  mounted () {},
+  beforeMount() {
+    console.log('before mounted run');
+  },
+  mounted () {
+    console.log('mounted run');
+  },
+  beforeUpdate() {
+    console.log('before update run');
+  },
   methods: {
-    mouseOver: function(){
-      document.getElementById("read_title").style.color = "#FF3F80"
-      document.getElementById("read_desc").style.color = "#FFD54F"
-        console.log('mouseOver');
+    changeListStyle: function(selectedStyle) {
+      if (selectedStyle == currentStyle) {
+        return;
+      }
+      if (selectedStyle == '热门') {
+        getReadList()
+      } else {
+
+      }
     },
-    mouseLeave: function(){
-      document.getElementById("read_title").style.color = "#333"
-      document.getElementById("read_desc").style.color = "#828a92"
-        console.log('mouseLeave');
+    openUrl: function(read){
+      this.mouseOverItem = ''
+      var win = window.open(read.newsArray[0].url, '_blank')
+      win.focus()
     },
-    getReadList(url, needContact) {
+    getReadList(url, needContact, listStyle) {
       this.$http.options.emulateJSON = true;
       if (!url) {
-        url = this.apiUrl
-        console.log('url : ' + this.apiUrl);
+        if (listStyle == '热门') {
+          url = this.apiUrl
+          console.log('url : ' + this.apiUrl);
+        } else {
+          url = this.apiUrlRecent
+          console.log('url : ' + this.apiUrlRecent);
+        }
       }
       this.$http.get(this.$Api(url))
           .then((response) => {
@@ -120,7 +154,7 @@ export default {
     line-height: 1.26em;
     padding-left: 26px;
     padding-right: 26px;
-    color: #f9c813;
+    color: #FFC107;
   }
   .card_item {
     color: #333;
@@ -145,4 +179,21 @@ export default {
     margin-top: 0px;
     margin-bottom: 38px;
   }
+  .menu_selector {
+    position: fixed;
+    top: 90%;
+    left: 90%;
+    width: 30px;
+    height: 30px;
+    background: #333;
+  }
+
+  .el-button.el-button--primary {
+    color: #eee;
+    background-color: #333;
+    border-color: #333;
+    border-radius: 0;
+    font-size: .36rem;
+}
+
 </style>
