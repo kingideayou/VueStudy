@@ -3,18 +3,12 @@
   <!-- v-bind:class="{ background: 'colorList[read.id % 6]'}"> -->
   <div class="root_content">
     <ul>
-      <li class="read_card" v-for="read in readList"
-            :class="{ read_card_hover: mouseOverItem == read }"
-            v-on:mouseover="mouseOverItem = read"
-            v-on:mouseleave="mouseOverItem = ''">
-
+      <li class="read_card" v-for="read in readList">
         <a class="card_item" :href="read.url ? read.url : read.newsArray[0].url" target="_blank">
           <div id="read_title"
-              class="read_title"
-              :class="{ read_title_hover: mouseOverItem == read }">{{ read.title}}</div>
+              class="read_title">{{ read.title}}</div>
           <div id="read_desc" v-if="read.summary"
-              class="read_desc"
-              :class="{ read_desc_hover: mouseOverItem == read }">
+              class="read_desc">
             {{ read.summary}}
           </div>
         </a>
@@ -49,7 +43,6 @@ export default {
       apiUrlRecent: 'https://api.readhub.me/news?pageSize=20',
       readList: [],
       colorList: ["#6ABBED", "#7FC667", "#7277E7", "#EE6A6C", "#718FD5", "#74C5CB"],
-      mouseOverItem: '',
       currentStyle: '热门'
     }
   },
@@ -78,7 +71,6 @@ export default {
       window.scrollTo(0, 0)
     },
     openUrl: function(read){
-      this.mouseOverItem = ''
       var win = window.open(read.newsArray[0].url, '_blank')
       win.focus()
     },
@@ -141,26 +133,12 @@ export default {
     padding-left: 16px;
     padding-right: 16px;
   }
-  .read_desc_hover {
-    margin-top: 10px;
-    color: #FFD54F;
-    padding-left: 16px;
-    padding-right: 16px;
-  }
   .read_title {
     font-size: 1.26rem;
     font-weight: 500;
     line-height: 1.26em;
     padding-left: 26px;
     padding-right: 26px;
-  }
-  .read_title_hover {
-    font-size: 1.26rem;
-    font-weight: 500;
-    line-height: 1.26em;
-    padding-left: 26px;
-    padding-right: 26px;
-    color: #FFC107;
   }
   .card_item {
     color: #333;
@@ -173,7 +151,24 @@ export default {
     margin-bottom: 38px;
     box-shadow: 0 0 .555rem .22rem rgba(0,0,0,.05);
   }
-  .read_card_hover {
+
+  .read_card:hover .read_title {
+    font-size: 1.26rem;
+    font-weight: 500;
+    line-height: 1.26em;
+    padding-left: 26px;
+    padding-right: 26px;
+    color: #FFC107;
+  }
+
+  .read_card:hover .read_desc {
+    margin-top: 10px;
+    color: #FFD54F;
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .read_card:hover {
     width: 100%;
     margin-right: 10px;
     border-radius: 0px;
@@ -181,6 +176,7 @@ export default {
     box-shadow: 0 0 .455rem .08rem rgba(0,0,0,.05);
     background: #333;
   }
+
   .button_load_more {
     margin-top: 0px;
     margin-bottom: 38px;
