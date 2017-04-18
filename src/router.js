@@ -42,7 +42,8 @@ const routes = [
   { path: '/DailyDetail/:id', component: ZhihuDailyDetail},
    // 动态路径参数 以冒号开头
   { path: '/user/:id', component: User},
-  { path: '/ReadHub', component: ReadHub}
+  { path: '/ReadHub', component: ReadHub},
+  { path: '/ReadHub/:sourceType', component: ReadHub}
 ]
 // 3. 创建 router 实例，然后传 `routes` 配置
 const router = new VueRouter({

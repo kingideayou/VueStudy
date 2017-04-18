@@ -22,11 +22,11 @@
     <div id="share_button" class="menu_selector" v-on:click="">
       <el-dropdown @command="changeListStyle">
         <el-button type="primary">
-          {{ currentStyle }}
+          {{ currentStyle == 'hot' ? '热门' : '最新' }}
         </el-button>
         <el-dropdown-menu slot="dropdown">
-          <el-dropdown-item command="热门">热门</el-dropdown-item>
-          <el-dropdown-item command="最新">最新</el-dropdown-item>
+          <el-dropdown-item command="hot">热门</el-dropdown-item>
+          <el-dropdown-item command="new">最新</el-dropdown-item>
         </el-dropdown-menu>
       </el-dropdown>
     </div>
@@ -43,10 +43,18 @@ export default {
       apiUrlRecent: 'https://api.readhub.me/news?pageSize=20',
       readList: [],
       colorList: ["#6ABBED", "#7FC667", "#7277E7", "#EE6A6C", "#718FD5", "#74C5CB"],
-      currentStyle: '热门'
+      currentStyle: 'hot'
     }
   },
   created() {
+    var sourceType = this.$route.params.sourceType
+    if (sourceType) {
+      if (sourceType == 'new') {
+        this.currentStyle = 'new'
+      } else {
+        this.currentStyle = 'hot'
+      }
+    }
     this.getReadList()
     document.title = '科技资讯 - 一个就够了'
     console.log('created run');
@@ -66,6 +74,7 @@ export default {
       if (selectedStyle == this.currentStyle) {
         return;
       }
+      this.$router.replace({ path: '/ReadHub/' + selectedStyle })
       this.currentStyle = selectedStyle
       this.getReadList()
       window.scrollTo(0, 0)
@@ -77,7 +86,7 @@ export default {
     getReadList(url, needContact) {
       this.$http.options.emulateJSON = true;
       if (!url) {
-        if (this.currentStyle == '热门') {
+        if (this.currentStyle == 'hot') {
           url = this.apiUrl
           console.log('url : ' + this.apiUrl);
         } else {
@@ -101,7 +110,7 @@ export default {
     },
     loadMore() {
       var requestUrl;
-      if (this.currentStyle == '热门') {
+      if (this.currentStyle == 'hot') {
         var lastReadId = this.readList[this.readList.length-1].id;
         requestUrl = 'https://api.readhub.me/topic?lastCursor=' + lastReadId + '&pageSize=20';
       } else {
